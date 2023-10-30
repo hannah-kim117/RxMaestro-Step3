@@ -1,3 +1,7 @@
+<html>
+
+
+
 <head>
     <title>Patients</title>
     <link rel="stylesheet" href="style.css">
@@ -8,6 +12,123 @@
     <a href="patients.html">Patients</a>
     | 
     <a href="patientPrescriptions.html">Patient Prescriptions</a>
+
+    <div id="browse" style="display: block;">
+        <p>
+            <a href="#" onclick="showAll()">Display all forms</a>
+        </p>
+        <table border="1" cellpadding="5">
+            <tbody>
+                <tr>
+                    <th>
+                        <a href="#" onclick="newPatient()">Add</a>
+                    </th>
+                    <th></th>
+                    <th>patientID</th>
+                    <th>name</th>
+                    <th>phoneNumber</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updatePatient('this.patientID')">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="deletePatient('this.patientID')">Delete</a>
+                    </td>
+                    <td align="right">1</td>
+                    <td>Bob White</td>
+                    <td>121-212-1212</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updatePatient('this.patientID')">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="deletePatient('this.patientID')">Delete</a>
+                    </td>
+                    <td align="right">2</td>
+                    <td>John Smith</td>
+                    <td>123-456-7890</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updatePatient('this.patientID')">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="deletePatient('this.patientID')">Delete</a>
+                    </td>
+                    <td align="right">3</td>
+                    <td>Anne Ko</td>
+                    <td>000-111-2222</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+
+    <!-- add a patient -->
+    <div id="insert" style="display: block;">
+        <form action="POST" id="addPatient">
+            <legend>
+                <strong>Add Patient</strong>
+            </legend>
+            <fieldset>
+                <label for="name">Name</label>
+                <input type="text">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text">
+            </fieldset>
+            <input type="submit" class="btn" id="addPatient" value="Add Patient">
+            <input type="button" class="btn" onclick="browsePatient()" value="Cancel">
+        </form>
+    </div>
     
+    <!-- update patient -->
+    <p>&nbsp;</p>
+    <div id="update" style="display: block;">
+        <form action="POST" id="updatePatient">
+            <legend>
+                <strong>Update Patient</strong>
+            </legend>
+            <fieldset class="fields">
+                <input type="hidden" name="patientID" id="updatePatientID" value="1">
+                <label for="id">ID:</label>
+                " 1 "
+                <label for="name">Name</label>
+                <input type="text" name="name" value="Bob White">
+                <label for="phoneNumber">Phone Number</label>
+                <input type="text" name="phoneNumber" value="121-212-1212">
+            </fieldset>
+            <input type="submit" class="btn" id="updateSavePatient" value="Update Patient">
+            <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
+        </form>
+    </div>
+
+    <!-- delete patient -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block;">
+        <form action="POST" id="deletePatient">
+            <legend>
+                <strong>Delete Patient</strong>
+            </legend>
+            <fieldset class="fields">
+                <p>Are you sure you want to delete the following patient?</p>
+                <input type="hidden" name="patientID" id="deletePatientID" value="1">
+                <label for="id">
+                    <strong>ID: </strong>
+                </label>
+                " 1 "
+                <label for="name">
+                    <strong>Name</strong>
+                    
+                </label>
+                "Bob White"
+            </fieldset>
+            <input type="submit" class="btn" id="deletePatient" value="Delete Patient">
+            <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
+        </form>
+    </div>
 
 </body>
+
+</html>
