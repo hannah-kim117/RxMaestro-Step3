@@ -3,7 +3,7 @@
 
 
 <head>
-    <title>Drugs</title>
+    <title>Patient Prescriptions</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -77,11 +77,9 @@
                 <strong>Add Prescription</strong>
             </legend>
             <fieldset>
-                <label for="patientPrescriptionsID">patientPrescriptionsID:</label>
-                <input type="text">
                 <label for="dosage">Dosage</label>
                 <input type="text">
-                <label for="drugID">drugID</label>
+                <label for="drugID">drugID (RXCUI)</label>
                 <input type="text">
                 <label for="patientID">patientID</label>
                 <input type="text">
@@ -100,10 +98,10 @@
             </legend>
             <fieldset class="fields">
                 <label for="patientPrescriptionsID">patientPrescriptionsID: </label>
-                1
+                <input type="number" min="0">
                 <label for="dosage">Dosage</label>
                 <input type="text">
-                <label for="drugID">drugID</label>
+                <label for="drugID">drugID (RXCUI)</label>
                 <input type="text">
                 <label for="patientID">patientID</label>
                 <input type="text">
@@ -126,12 +124,7 @@
                 <label for="id">
                     <strong>patientPrescriptionsID: </strong>
                 </label>
-                 1 
-                <label for="patientID">
-                    <strong>patientID: </strong>
-                    1
-                </label>
-                
+                 <input type="number" min="0"> 
             </fieldset>
             <input type="submit" class="btn" id="deletePrescription" value="Delete Prescription">
             <input type="button" class="btn" value="Cancel" onclick="browsePrescription()">
