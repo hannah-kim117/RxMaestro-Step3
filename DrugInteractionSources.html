@@ -1,0 +1,118 @@
+<html>
+
+
+
+<head>
+    <title>Drug Interaction Sources</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Drug Interaction Sources</h1>
+    [ 
+    <a href="Patients.html">Patients</a>
+    | 
+    <a href="PatientPrescriptions.html">Patient Prescriptions</a>
+    |
+    <a href="DrugsInteractions.html">Drug Interactions</a>
+    |
+    <a href="Drugs.html">Drugs</a>
+    |
+    <a href="Manufacturers.html">Manufacturers</a>
+    |
+    <a href="DrugInteractionSources.html">Drug Interaction Sources</a>
+    ]
+
+    <div id="browse" style="display: block;">
+        <p>
+            <strong>Browse Sources</strong>
+        </p>
+        <table border="1" cellpadding="5">
+            <tbody>
+                <tr>
+                    <th>
+                        <a href="#" onclick="newDrug()">Add</a>
+                    </th>
+                    <th></th>
+                    <th>sourceName</th>
+                    <th>url</th>
+                   
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updateSource('this.sourceName')">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="deleteSource('this.sourceName')">Delete</a>
+                    </td>
+                    <td>ONCHigh</td>
+                    <td>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/
+
+                    </td>
+                   
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updateSource('this.sourceName')">Edit</a>
+                    </td>
+                    <td>
+                        <a href="#" onclick="deleteSource('this.sourceName')">Delete</a>
+                    </td>
+                    <td>DrugBank</td>
+                    <td>https://go.drugbank.com/
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+
+    <!-- add source -->
+    <div id="insert" style="display: block;">
+        <form action="POST" id="addSource">
+            <legend>
+                <strong>Add Source</strong>
+            </legend>
+            <fieldset>
+                <label for="sourceName">sourceName:</label>
+                <input type="text">
+                <label for="url">url:</label>
+                <input type="text">
+                
+            </fieldset>
+            <input type="submit" class="btn" id="addSource" value="Add Source">
+            <input type="button" class="btn" onclick="browseSource()" value="Cancel">
+        </form>
+    </div>
+    
+
+
+    <!-- delete source -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block;">
+        <form action="POST" id="deleteSource">
+            <legend>
+                <strong>Delete Source</strong>
+            </legend>
+            <fieldset class="fields">
+                <p>Are you sure you want to delete the following Source?</p>
+                <input type="hidden" name="sourceName" id="sourceName" value="ONCHigh">
+                <label for="sourceName">
+                    <strong>sourceName: </strong>
+                </label>
+                ONCHigh 
+                <label for="url">
+                    <strong>url: </strong>
+                    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/
+
+
+                </label>
+                
+            </fieldset>
+            <input type="submit" class="btn" id="deleteSource" value="Delete Source">
+            <input type="button" class="btn" onclick="browseSource()" value="Cancel">
+        </form>
+    </div>
+
+</body>
+
+</html>
