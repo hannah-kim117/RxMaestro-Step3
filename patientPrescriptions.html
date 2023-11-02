@@ -100,48 +100,4 @@
         </form>
     </div>
     
-    <!-- update prescription -->
-    <p>&nbsp;</p>
-    <div id="update" style="display: block;">
-        <form action="POST" id="updatePrescription">
-            <legend>
-                <strong>Update Prescription</strong>
-            </legend>
-            <fieldset class="fields">
-                <label for="patientPrescriptionsID">patientPrescriptionsID: </label>
-                <input type="number" min="0">
-                <label for="dosage">Dosage</label>
-                <input type="text">
-                <label for="drugID">drugID (RXCUI)</label>
-                <input type="text">
-                <label for="patientID">patientID</label>
-                <input type="text">
-            </fieldset>
-            <input type="submit" class="btn" id="updateSavePrescription" value="Update Prescription">
-            <input type="button" class="btn" value="Cancel" onclick="browsePrescription()">
-        </form>
-    </div>
-
-    <!-- delete prescription -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deletePrescription">
-            <legend>
-                <strong>Delete Prescription</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following prescription?</p>
-                <input type="hidden" name="patientPrescriptionsID" id="deletePrescriptionID" value="1">
-                <label for="id">
-                    <strong>patientPrescriptionsID: </strong>
-                </label>
-                 <input type="number" min="0"> 
-            </fieldset>
-            <input type="submit" class="btn" id="deletePrescription" value="Delete Prescription">
-            <input type="button" class="btn" value="Cancel" onclick="browsePrescription()">
-        </form>
-    </div>
-
-</body>
-
-</html>
+    
