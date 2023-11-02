@@ -9,6 +9,8 @@
 <body>
     <h1>Drug Interactions</h1>
     [ 
+    <a href="Home.html">Home</a>
+    |
     <a href="Patients.html">Patients</a>
     | 
     <a href="PatientPrescriptions.html">Patient Prescriptions</a>
@@ -136,30 +138,7 @@
         </form>
     </div>
 
-    <!-- delete interaction -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deleteInteraction">
-            <legend>
-                <strong>Delete Interaction</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following Interaction?</p>
-                <input type="hidden" name="drugID1" id="deleteDrugID1" value="153008">
-                <label for="id">
-                    <strong>drugID1: </strong>
-                </label>
-                153008 
-                <label for="drugID2">
-                    <strong>drugID2: </strong>
-                    7646
-                </label>
-                
-            </fieldset>
-            <input type="submit" class="btn" id="deleteInteraction" value="Delete Interaction">
-            <input type="button" class="btn" value="Cancel" onclick="browseInteraction()">
-        </form>
-    </div>
+  
 
 </body>
 

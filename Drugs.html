@@ -9,6 +9,8 @@
 <body>
     <h1>Drugs</h1>
     [ 
+    <a href="Home.html">Home</a>
+    |
     <a href="Patients.html">Patients</a>
     | 
     <a href="PatientPrescriptions.html">Patient Prescriptions</a>
@@ -107,51 +109,7 @@
         </form>
     </div>
     
-    <!-- update interaction -->
-    <p>&nbsp;</p>
-    <div id="update" style="display: block;">
-        <form action="POST" id="updateDrug">
-            <legend>
-                <strong>Update Drug</strong>
-            </legend>
-            <fieldset>
-                <label for="drugID">drugID:</label>
-                <input type="text">
-                <label for="drugName">drugName:</label>
-                <input type="text">
-                <label for="manufacturerID">Manufacturer ID</label>
-                <input type="text">
-            </fieldset>
-            <input type="submit" class="btn" id="updateDrug" value="Update Drug">
-            <input type="button" class="btn" onclick="browseDrug()" value="Cancel">
-        </form>
-    </div>
-
-    <!-- delete interaction -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deleteDrug">
-            <legend>
-                <strong>Delete Drug</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following Drug?</p>
-                <input type="hidden" name="drugID" id="drugID" value="153008">
-                <label for="id">
-                    <strong>drugID: </strong>
-                </label>
-                153008 
-                <label for="drugName">
-                    <strong>drugName: </strong>
-                    Ibuprofen
-                </label>
-                
-            </fieldset>
-            <input type="submit" class="btn" id="deleteDrug" value="Delete Drug">
-            <input type="button" class="btn" value="Cancel" onclick="browseDrug()">
-        </form>
-    </div>
-
+    
 </body>
 
 </html>
