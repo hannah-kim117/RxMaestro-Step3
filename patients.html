@@ -104,7 +104,7 @@
             <fieldset class="fields">
                 <input type="hidden" name="patientID" id="updatePatientID" value="1">
                 <label for="id">ID:</label>
-                " 1 "
+                <input type="number" min="0">
                 <label for="name">Name</label>
                 <input type="text" name="name" value="Bob White">
                 <label for="phoneNumber">Phone Number</label>
@@ -128,12 +128,11 @@
                 <label for="id">
                     <strong>ID: </strong>
                 </label>
-                " 1 "
+                <input type="number" min="0">
                 <label for="name">
                     <strong>Name</strong>
-                    
                 </label>
-                "Bob White"
+                <input type="text" value="Bob White">
             </fieldset>
             <input type="submit" class="btn" id="deletePatient" value="Delete Patient">
             <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
