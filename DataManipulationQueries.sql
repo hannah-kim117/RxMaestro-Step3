@@ -25,9 +25,7 @@ INSERT INTO Drugs (drugID, drugName, manufacturerID)
 VALUES (:drugIDInput, :drugNameInput, (SELECT manufacturerID FROM Manufacturers WHERE name = :manufacturerNameInput));
 
 -- get all attributes needed for Drugs Table
-SELECT drugID, drugName, Manufacturers.name FROM Drugs
-JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID
-ORDER BY drugName;
+SELECT drugID, drugName, manufacturerID FROM Drugs;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -44,10 +42,7 @@ VALUES
 );
 
 -- READ all attributes
-SELECT Patients.name, PatientPrescriptions.drugID, Drugs.drugName, dosage FROM PatientPrescriptions
-JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID
-JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID
-ORDER BY Patients.name;
+SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescriptions;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -71,10 +66,7 @@ SET drugID1 = :drugIDInput, drugID2 = :drugIDInput, source = :sourceNameInput, s
 WHERE interactionID = :interactionIDInput;
 
 -- READ all attributes
-SELECT interactionID, drugID1, Drugs1.drugName, drugID2, Drugs2.drugName, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions
-JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID
-JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID 
-ORDER BY interactionID; 
+SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions; 
 
 ------------------------------------------------------------
 ------------------------------------------------------------
