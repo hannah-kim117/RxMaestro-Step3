@@ -34,18 +34,13 @@
                     <th>
                         <a href="#" onclick="newDrug()">Add</a>
                     </th>
-                    <th></th>
+                    
                     <th>sourceName</th>
                     <th>url</th>
                    
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updateSource('this.sourceName')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deleteSource('this.sourceName')">Delete</a>
-                    </td>
+                    <td></td>
                     <td>ONCHigh</td>
                     <td>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/
 
@@ -53,12 +48,7 @@
                    
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updateSource('this.sourceName')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deleteSource('this.sourceName')">Delete</a>
-                    </td>
+                   <td></td>
                     <td>DrugBank</td>
                     <td>https://go.drugbank.com/
                     </td>
@@ -88,32 +78,6 @@
     
 
 
-    <!-- delete source -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deleteSource">
-            <legend>
-                <strong>Delete Source</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following Source?</p>
-                <input type="hidden" name="sourceName" id="sourceName" value="ONCHigh">
-                <label for="sourceName">
-                    <strong>sourceName: </strong>
-                </label>
-                ONCHigh 
-                <label for="url">
-                    <strong>url: </strong>
-                    https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/
-
-
-                </label>
-                
-            </fieldset>
-            <input type="submit" class="btn" id="deleteSource" value="Delete Source">
-            <input type="button" class="btn" onclick="browseSource()" value="Cancel">
-        </form>
-    </div>
 
 </body>
 

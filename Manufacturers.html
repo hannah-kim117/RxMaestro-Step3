@@ -34,41 +34,26 @@
                     <th>
                         <a href="#" onclick="newDrug()">Add</a>
                     </th>
-                    <th></th>
+                    
                     <th>manufacturerID</th>
                     <th>name</th>
                     <th>phoneNumber</th>
                     
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updateManufacturer('this.manufacturerID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deleteManufacturer('this.manufacturerID')">Delete</a>
-                    </td>
+                    <td></td>
                     <td>1</td>
                     <td>Pfizer</td>
                     <td>111-1111-1111</td>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updateManufacturer('this.manufacturerID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deleteManufacturer('this.manufacturerID')">Delete</a>
-                    </td>
+                    <td></td>
                     <td>2</td>
                     <td>Johnson & Johnson</td>
                     <td>222-2222-2222</td>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updateManufacturer('this.manufacturerID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deleteManufacturer('this.manufacturerID')">Delete</a>
-                    </td>
+                   <td></td>
                     <td>3</td>
                     <td>Zoetis</td>
                     <td>333-3333-3333</td>
@@ -99,50 +84,7 @@
         </form>
     </div>
     
-    <!-- update interaction -->
-    <p>&nbsp;</p>
-    <div id="update" style="display: block;">
-        <form action="POST" id="updateManufacturer">
-            <legend>
-                <strong>Update Manufacturer</strong>
-            </legend>
-            <fieldset>
-                <label for="manufacturerID">manufacturerID:</label>
-                1
-                <label for="name">name:</label>
-                <input type="text">
-                <label for="phoneNumber">phoneNumber</label>
-                <input type="text">
-            </fieldset>
-            <input type="submit" class="btn" id="updateManufacturer" value="Update Manufacturer">
-            <input type="button" class="btn" onclick="browseManufacturer()" value="Cancel">
-        </form>
-    </div>
-
-    <!-- delete manufacturer -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deleteManufacturer">
-            <legend>
-                <strong>Delete Manufacturer</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following Manufacturer?</p>
-                <input type="hidden" name="manufacturerID" id="manufacturerID" value="1">
-                <label for="id">
-                    <strong>manufacturerID: </strong>
-                </label>
-                1 
-                <label for="name">
-                    <strong>name: </strong>
-                    Pfizer
-                </label>
-                
-            </fieldset>
-            <input type="submit" class="btn" id="deleteManufacturer" value="Delete Manufacturer">
-            <input type="button" class="btn" value="Cancel" onclick="browseManufacturer()">
-        </form>
-    </div>
+  
 
 </body>
 
