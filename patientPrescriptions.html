@@ -76,8 +76,12 @@
                 <label for="dosage">Dosage</label>
                 <input type="text">
                 <label for="drugID">drugID (RXCUI)</label>
-                <input type="text">
-                <label for="patientID">Patient</label>
+                <select type="text" name="drugID" id="drugID" required>
+                    <option value="ibuprofen">Ibuprofen</option>
+                    <option value="furosemide">Furosemide</option>
+                    <option value="omeprazole">Omeprazole</option>
+                </select>
+                <label for="patientID">patientID</label>
                 <select type="text" name="patientID" id="patientID" required>
                     <option value="bobwhite">Bob White</option>
                     <option value="johnsmith">John Smith</option>
