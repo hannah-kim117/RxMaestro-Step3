@@ -93,51 +93,6 @@
             <input type="button" class="btn" onclick="browsePatient()" value="Cancel">
         </form>
     </div>
-    
-    <!-- update patient -->
-    <p>&nbsp;</p>
-    <div id="update" style="display: block;">
-        <form action="POST" id="updatePatient">
-            <legend>
-                <strong>Update Patient</strong>
-            </legend>
-            <fieldset class="fields">
-                <input type="hidden" name="patientID" id="updatePatientID" value="1">
-                <label for="id">ID:</label>
-                <input type="number" min="0">
-                <label for="name">Name</label>
-                <input type="text" name="name" value="Bob White">
-                <label for="phoneNumber">Phone Number</label>
-                <input type="text" name="phoneNumber" value="121-212-1212">
-            </fieldset>
-            <input type="submit" class="btn" id="updateSavePatient" value="Update Patient">
-            <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
-        </form>
-    </div>
-
-    <!-- delete patient -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block;">
-        <form action="POST" id="deletePatient">
-            <legend>
-                <strong>Delete Patient</strong>
-            </legend>
-            <fieldset class="fields">
-                <p>Are you sure you want to delete the following patient?</p>
-                <input type="hidden" name="patientID" id="deletePatientID" value="1">
-                <label for="id">
-                    <strong>ID: </strong>
-                </label>
-                <input type="number" min="0">
-                <label for="name">
-                    <strong>Name</strong>
-                </label>
-                <input type="text" value="Bob White">
-            </fieldset>
-            <input type="submit" class="btn" id="deletePatient" value="Delete Patient">
-            <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
-        </form>
-    </div>
 
 </body>
 

@@ -92,5 +92,46 @@
             <input type="button" class="btn" onclick="browsePrescription()" value="Cancel">
         </form>
     </div>
+
+    <!-- update a prescription -->
+    <p>&nbsp;</p>
+    <div id="update" style="display: block;">
+        <form action="POST" id="updatePatientPrescription">
+            <legend>
+                <strong>Update Patient Prescription</strong>
+            </legend>
+            <fieldset class="fields">
+                <input type="hidden" name="patientPrescriptionID" id="updatePatientPrescriptionID" value="1">
+                <label for="patientPrescriptionID">patientPrescriptionsID:</label>
+                <input type="number" min="0">
+                <label for="patientID">patientID:</label>
+                <input type="number" min="0">
+                <label for="drugID">drugID (RXCUI)</label>
+                <input type="text" name="name" value="">
+                <label for="dosage">Dosage</label>
+                <input type="text" name="dosage" value="">
+            </fieldset>
+            <input type="submit" class="btn" id="updateSavePatient" value="Update Patient">
+            <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
+        </form>
+    </div>
     
-    
+        <!-- delete Patient Prescription -->
+        <p>&nbsp;</p>
+        <div id="delete" style="display: block;">
+            <form action="POST" id="deletePatient">
+                <legend>
+                    <strong>Delete Patient Prescription</strong>
+                </legend>
+                <fieldset class="fields">
+                    <p>Are you sure you want to delete the following patient prescription?</p>
+                    <input type="hidden" name="patientPrescriptionID" id="deletePatientPrescriptionID" value="1">
+                    <label for="patientPrescriptionID">
+                        <strong>patientPresctiptionID: </strong>
+                    </label>
+                    <input type="number" min="0">
+                </fieldset>
+                <input type="submit" class="btn" id="deletePatient" value="Delete Patient">
+                <input type="button" class="btn" value="Cancel" onclick="browsePatient()">
+            </form>
+        </div>
