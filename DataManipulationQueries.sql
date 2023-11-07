@@ -41,6 +41,15 @@ VALUES
     :dosageInput
 );
 
+-- UPDATE entry
+UPDATE PatientPrescriptions
+SET patientID = :patientIDInput, drugID = :drugIDInput, dosage = :dosageInput
+WHERE patientPrescriptionID = :idInput;
+
+-- DELETE entry
+DELETE FROM PatientPrescriptions
+WHERE patientPrescriptionID = :idInput;
+
 -- READ all attributes
 SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescriptions;
 
@@ -76,15 +85,6 @@ SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM 
 -- CREATE entry
 INSERT INTO Patients (name, phoneNumber)
 VALUES (:nameInput, :phoneNumberInput);
-
--- UPDATE entry
-UPDATE Patients
-SET name = :nameInput, phoneNumber = :phoneNumberInput
-WHERE patientID = :idInput;
-
--- DELETE entry
-DELETE FROM Patients
-WHERE patientID = :idInput;
 
 -- READ all attributes
 SELECT patientID, name, phoneNumber FROM Patients;
