@@ -34,43 +34,28 @@
                     <th>
                         <a href="#" onclick="newPrescription()">Add</a>
                     </th>
-                    <th></th>
+                
                     <th>patientPrescriptionsID</th>
                     <th>dosage</th>
                     <th>drugID</th>
                     <th>patientID</th>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updatePrescription('this.patientPrescriptionsID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deletePrescription('this.patientPrescriptionsID')">Delete</a>
-                    </td>
+                    <td></td>
                     <td align="right">1</td>
                     <td>50mg</td>
                     <td>7646</td>
                     <td>1</td>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updatePrescription('this.patientPrescriptionsID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deletePrescription('this.patientPrescriptionsID')">Delete</a>
-                    </td>
+                    <td></td>
                     <td align="right">2</td>
                     <td>2ml</td>
                     <td>153008</td>
                     <td>2</td>
                 </tr>
                 <tr>
-                    <td>
-                        <a href="#" onclick="updatePrescription('this.patientPrescriptionsID')">Edit</a>
-                    </td>
-                    <td>
-                        <a href="#" onclick="deletePrescription('this.patientPrescriptionsID')">Delete</a>
-                    </td>
+                    <td></td>
                     <td align="right">3</td>
                     <td>35mg</td>
                     <td>1546056</td>
@@ -91,9 +76,17 @@
                 <label for="dosage">Dosage</label>
                 <input type="text">
                 <label for="drugID">drugID (RXCUI)</label>
-                <input type="text">
+                <select type="text" name="drugID" id="drugID" required>
+                    <option value="ibuprofen">Ibuprofen</option>
+                    <option value="furosemide">Furosemide</option>
+                    <option value="omeprazole">Omeprazole</option>
+                </select>
                 <label for="patientID">patientID</label>
-                <input type="text">
+                <select type="text" name="patientID" id="patientID" required>
+                    <option value="bobwhite">Bob White</option>
+                    <option value="johnsmith">John Smith</option>
+                    <option value="anneko">Anne Ko</option>
+                </select>
             </fieldset>
             <input type="submit" class="btn" id="addPrescription" value="Add Prescription">
             <input type="button" class="btn" onclick="browsePrescription()" value="Cancel">
