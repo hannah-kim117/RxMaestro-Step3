@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9619;
+PORT = 9623;
 var db = require('./database/db-connector');
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
@@ -32,6 +32,7 @@ app.get('/manufacturers', function(req, res){
 });
 
 app.get('/patient-prescriptions', function(req, res){
+
     let query1 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
     let query2 = "SELECT * FROM Patients";
     let query3 = "SELECT * FROM Drugs";
@@ -60,25 +61,26 @@ app.get('/patients', function(req, res){
 
 app.post('/add-patient-prescription', function(req, res) 
 {
+    console.log("Entered Patient Prescriptions ADD");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Capture NULL values
-    let dosage = data.inputDosage;
+    let dosage = data.dosage;
     if (!dosage)
     {
         dosage = 'NULL'
     }
 
-    let drugName = data.inputDrugName;
-    let patientName = data.inputPatientName
+    let drugID = data.drugID;
+    let patientID = data.patientID;
 
     // Create the query and run it on the database
     query1 = `INSERT INTO PatientPrescriptions (patientID, drugID, dosage)
     VALUES 
     (
-        (SELECT patientID FROM Patients WHERE name = ${patientName}),
-        (SELECT drugID FROM Drugs WHERE drugName = ${drugName}),
+        ${patientID},
+        ${drugID},
         ${dosage}
     )`;
     db.pool.query(query1, function(error, rows, fields){

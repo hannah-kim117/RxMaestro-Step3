@@ -1,4 +1,5 @@
 function deletePatientPrescription(patientPrescriptionID) {
+  console.log(`Deleting ID: ${patientPrescriptionID}`);
   let link = '/delete-patient-prescription/';
   let data = {
     id: patientPrescriptionID
