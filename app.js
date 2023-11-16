@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9613;
+PORT = 9615;
 var db = require('./database/db-connector');
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
@@ -13,6 +13,10 @@ app.set('view engine', '.hbs');
 
 app.get('/', function(req, res){
     res.render('index');
+});
+
+app.get('/drug-interactions', function(req, res){
+    res.render('DrugInteractions');
 });
 
 app.get('/drug-interaction-sources', function(req, res){

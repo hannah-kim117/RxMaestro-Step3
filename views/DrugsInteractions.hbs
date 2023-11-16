@@ -1,0 +1,139 @@
+<html>
+
+
+
+<head>
+    <title>Drug Interactions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Drug Interactions</h1>
+    [ 
+    <a href="/">Home</a>
+    |
+    <a href="patients">Patients</a>
+    | 
+    <a href="patient-prescriptions">Patient Prescriptions</a>
+    |
+    <a href="drug-interaction-sources">Drug Interactions</a>
+    |
+    <a href="drugs">Drugs</a>
+    |
+    <a href="manufacturers">Manufacturers</a>
+    |
+    <a href="drug-interaction-sources">Drug Interaction Sources</a>
+    ]
+
+    <div id="browse" style="display: block;">
+        <p>
+            <strong>Browse Drug Interactions</strong>
+        </p>
+        <table border="1" cellpadding="5">
+            <tbody>
+                <tr>
+                    <th>
+                        <a href="#" onclick="newPrescription()">Add</a>
+                    </th>
+                    
+                    <th>drugID1</th>
+                    <th>drugID2</th>
+                    
+                    <th>sideEffectDescription</th>
+                    <th>sideEffectSeverity</th>
+                    <th>source</th>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updateInteraction('this.drugID1')">Edit</a>
+                    </td>
+                   
+                    <td>153008</td>
+                    <td>7646</td>
+                    <td>The metabolism of Ibuprofen can be decreased when combined with Omeprazole.
+
+                    </td>
+                    <td>N/A</td>
+                    <td>DrugBank</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updateInteraction('this.drugID1')">Edit</a>
+                    </td>
+                    
+                    <td>153008</td>
+                    <td>1546056</td>
+                    <td>The therapeutic efficacy of Furosemide can be decreased when used in combination with Ibuprofen
+                    </td>
+                    <td>N/A</td>
+                    <td>DrugBank</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="#" onclick="updateInteraction('this.drugID1')">Edit</a>
+                    </td>
+                    
+                    <td>1546056</td>
+                    <td>3827</td>
+                    <td>The risk or severity of renal failure and hypotension can be increased when Furosemide is combined with Enalapril.
+
+                    </td>
+                    <td>Moderate</td>
+                    <td>DrugBank</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+
+    <!-- add an interaction -->
+    <div id="insert" style="display: block;">
+        <form action="POST" id="addInteraction">
+            <legend>
+                <strong>Add Interaction</strong>
+            </legend>
+            <fieldset>
+                <label for="drugID1">drugID1:</label>
+                <input type="text">
+                <label for="drugID2">drugID2:</label>
+                <input type="text">
+                <label for="sideEffectDescription">Description</label>
+                <input type="text">
+                <label for="sideEffectSeverity">Severity</label>
+                <input type="text">
+                <label for="source">Source</label>
+                <input type="text">
+            </fieldset>
+            <input type="submit" class="btn" id="addInteraction" value="Add Interaction">
+            <input type="button" class="btn" onclick="browseInteraction()" value="Cancel">
+        </form>
+    </div>
+    
+    <!-- update interaction -->
+    <p>&nbsp;</p>
+    <div id="update" style="display: block;">
+        <form action="POST" id="updateInteraction">
+            <legend>
+                <strong>Update Interaction</strong>
+            </legend>
+            <fieldset>
+                <label for="drugID1">drugID1:</label>
+                <input type="text">
+                <label for="drugID2">drugID2:</label>
+                <input type="text">
+                <label for="sideEffectDescription">Description</label>
+                <input type="text">
+                <label for="sideEffectSeverity">Severity</label>
+                <input type="text">
+                <label for="source">Source</label>
+                <input type="text">
+            </fieldset>
+            <input type="submit" class="btn" id="updateInteraction" value="Update Interaction">
+            <input type="button" class="btn" onclick="browseInteraction()" value="Cancel">
+        </form>
+    </div>
+
+  
+
+</body>
+
+</html>

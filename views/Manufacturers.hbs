@@ -1,0 +1,91 @@
+<html>
+
+
+
+<head>
+    <title>Manufacturers</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Manufacturers</h1>
+    [ 
+    <a href="/">Home</a>
+    |
+    <a href="patients">Patients</a>
+    | 
+    <a href="patient-prescriptions">Patient Prescriptions</a>
+    |
+    <a href="drug-interaction-sources">Drug Interactions</a>
+    |
+    <a href="drugs">Drugs</a>
+    |
+    <a href="manufacturers">Manufacturers</a>
+    |
+    <a href="drug-interaction-sources">Drug Interaction Sources</a>
+    ]
+
+    <div id="browse" style="display: block;">
+        <p>
+            <strong>Browse Manufacturers</strong>
+        </p>
+        <table border="1" cellpadding="5">
+            <tbody>
+                <tr>
+                    <th>
+                        <a href="#" onclick="newDrug()">Add</a>
+                    </th>
+                    
+                    <th>manufacturerID</th>
+                    <th>name</th>
+                    <th>phoneNumber</th>
+                    
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>Pfizer</td>
+                    <td>111-1111-1111</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>2</td>
+                    <td>Johnson & Johnson</td>
+                    <td>222-2222-2222</td>
+                </tr>
+                <tr>
+                   <td></td>
+                    <td>3</td>
+                    <td>Zoetis</td>
+                    <td>333-3333-3333</td>
+                </tr>
+                
+            </tbody>
+        </table>
+        <p>&nbsp;</p>
+    </div>
+
+    <!-- add Manufacturer -->
+    <div id="insert" style="display: block;">
+        <form action="POST" id="addManufacturer">
+            <legend>
+                <strong>Add Manufacturer</strong>
+            </legend>
+            <fieldset>
+                <label for="manufacturerID">manufacturerID:</label>
+                <input type="text">
+                <label for="name">name:</label>
+                <input type="text">
+                <label for="phoneNumber">phoneNumber</label>
+                <input type="text">
+                
+            </fieldset>
+            <input type="submit" class="btn" id="addManufacturer" value="Add Manufacturer">
+            <input type="button" class="btn" onclick="browseManufacturer()" value="Cancel">
+        </form>
+    </div>
+    
+  
+
+</body>
+
+</html>
