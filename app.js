@@ -81,7 +81,7 @@ app.post('/add-patient-prescription', function(req, res)
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescriptions;";
+            query2 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400

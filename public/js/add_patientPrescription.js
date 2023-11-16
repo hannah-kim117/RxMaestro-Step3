@@ -5,17 +5,13 @@ addPatientPrescriptionForm.addEventListener("submit", function (e){
     e.preventDefault();
 
     let inputDosage = document.getElementById("input-dosage");
-    let inputDrugName = document.getElementById("input-drugName");
-    let inputPatientName = document.getElementById("input-patientName");
-
-    let dosageValue = inputDosage.value;
-    let drugNameValue = inputDrugName.value;
-    let patientNameValue = inputPatientName.value;
+    let inputDrugID = document.getElementById("input-drugID-ajax");
+    let inputPatientID = document.getElementById("input-patientID-ajax");
 
     let data = {
-        dosage: dosageValue,
-        drugName: drugNameValue,
-        patientName: patientNameValue
+        dosage: inputDosage.value,
+        drugID: inputDrugID.value,
+        patientID: inputPatientID.value
     }
 
     var xhttp = new XMLHttpRequest();
@@ -31,8 +27,8 @@ addPatientPrescriptionForm.addEventListener("submit", function (e){
 
             // Clear the input fields for another transaction
             inputDosage.value = '';
-            inputDrugName.value = '';
-            inputPatientName.value = '';
+            inputDrugID.value = '';
+            inputPatientID.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
@@ -61,18 +57,24 @@ addRowToTable = (data) => {
     let dosageCell = document.createElement("TD");
     let drugIDCell = document.createElement("TD");
     let patientIDCell = document.createElement("TD");
+    let drugNameCell = document.createElement("TD");
+    let patientNameCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.patientPrescriptionID;
     dosageCell.innerText = newRow.dosage;
     drugIDCell.innerText = newRow.drugID;
     patientIDCell.innerText = newRow.patientID;
+    drugNameCell.innerText = newRow.drugName;
+    patientNameCell.innerText = newRow.name
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(dosageCell);
     row.appendChild(drugIDCell);
     row.appendChild(patientIDCell);
+    row.appendChild(drugNameCell);
+    row.appendChild(patientNameCell);
     
     // Add the row to the table
     currentTable.appendChild(row);
