@@ -1,0 +1,82 @@
+<!-- Patients.hbs -->
+
+<head>
+    <title>Patients</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Patients</h1>
+    [ 
+    <a href="Home.html">Home</a>
+    |
+    <a href="Patients.html">Patients</a>
+    | 
+    <a href="PatientPrescriptions.html">Patient Prescriptions</a>
+    |
+    <a href="DrugsInteractions.html">Drug Interactions</a>
+    |
+    <a href="Drugs.html">Drugs</a>
+    |
+    <a href="Manufacturers.html">Manufacturers</a>
+    |
+    <a href="DrugInteractionSources.html">Drug Interaction Sources</a>
+    ]
+
+    <div id="browse" style="display: block;">
+            <p>
+                <strong>Browse Patients</strong>
+            </p>
+
+
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Patient</h2>
+<form id="add-patient-form-ajax">
+    <label for="input-name">Name: </label>
+    <input type="text" name="input-name" id="input-name">
+    
+    <label for="input-phoneNumber">Phone Number: </label>
+    <input type="text" name="input-phoneNumber" id="input-phoneNumber">
+
+    
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_patient.js"></script>
+
+
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="patient-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            <th>
+                {{@key}}        <!-- key name for the current iteration step -->
+            </th>
+            {{/each}}
+            
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.patientID}</td>
+            <td>{{this.name}</td>
+            <td>{{this.phoneNumber}}</td>
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
