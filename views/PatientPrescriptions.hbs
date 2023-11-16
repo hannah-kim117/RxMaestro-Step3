@@ -34,7 +34,7 @@
 <p>To add a new prescription, please enter the information below and click 'Submit'!</p>
 <form id="add-patientPrescription-form-ajax">
     <label for="input-dosage">Dosage: </label>
-    <input type="text" name="input-dosage" id="input-dosage">
+    <input type="text" name="input-dosage" id="input-dosage" required>
     
     <label for="input-drugID">drugID: </label>
     <select name="input-drugID" id="input-drugID-ajax">
@@ -108,7 +108,7 @@
 <form id="update-patientPrescription-form-ajax">
 
     <label for="input-patientPrescriptionID">Prescription ID: </label>
-    <input type="number" name="input-patientPrescriptionID" id="input-patientPrescriptionID">
+    <input type="number" name="input-patientPrescriptionID" id="input-patientPrescriptionID" required>
 
     <label for="input-patientID">Patient: </label>
     <select name="input-patientID" id="input-patientID-update">
@@ -120,14 +120,14 @@
 
     <label for="input-drugID">Drug: </label>
     <select name="input-drugID" id="input-drugID-update">
-        <option>Select a Drug:</option>
+        <option value="Null" disabled selected>Select a Drug:</option>
         {{#each drugs}}
         <option value="{{this.drugID}}">{{this.drugName}}</option>
         {{/each}}
     </select>
 
     <label for="input-dosage">Dosage: </label>
-    <input type="text" name="input-dosage" id="input-dosage">
+    <input type="text" name="input-dosage" id="input-dosage" required>
 
 
     <input type="submit">
