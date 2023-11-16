@@ -115,7 +115,7 @@ app.post('/add-patient-prescription', function(req, res)
     })
 });
 
-app.delete('/delete-patient-prescription/', function(req,res,next){
+app.delete('/delete-patient-prescription', function(req,res,next){
     let data = req.body;
     let patientPrescriptionID = parseInt(data.id);
     let deletePatientPrescription = `DELETE FROM PatientPrescriptions
@@ -130,6 +130,50 @@ app.delete('/delete-patient-prescription/', function(req,res,next){
         }
     });
 });
+
+app.put('/update-patient-prescription', function(req,res,next){
+    console.log("Updating prescription");
+    let data = req.body;
+  
+     // Capture NULL values
+     let dosage = data.dosage;
+     if (!dosage)
+     {
+         dosage = 'NULL'
+     }
+ 
+     let drugID = parseInt(data.drugID);
+     let patientID = parseInt(data.patientID);
+     let patientPrescriptionID = parseInt(data.patientPrescriptionID);
+  
+    let queryUpdatePrescription = `UPDATE PatientPrescriptions SET patientID = ${patientID}, drugID = ${drugID}, dosage = ${dosage} WHERE patientPrescriptionID = ${patientPrescriptionID}`;
+    let query2 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
+  
+          // Run the 1st query
+          db.pool.query(queryUpdatePrescription, function(error, rows, fields){
+              if (error) {
+  
+              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+              console.log(error);
+              res.sendStatus(400);
+              }
+  
+              // If there was no error, we run our second query and return that data so we can use it to update the people's
+              // table on the front-end
+              else
+              {
+                  // Run the second query
+                  db.pool.query(query2, function(error, rows, fields) {
+  
+                      if (error) {
+                          console.log(error);
+                          res.sendStatus(400);
+                      } else {
+                          res.send(rows);
+                      }
+                  })
+              }
+  })});
   
     
 // Listener
