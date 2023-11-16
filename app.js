@@ -32,7 +32,7 @@ app.get('/manufacturers', function(req, res){
 });
 
 app.get('/patient-prescriptions', function(req, res){
-    let query1 = "SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescriptions;";
+    let query1 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
     db.pool.query(query1, function(error, rows, fields) {
         res.render('PatientPrescriptions', {data: rows});
     });
