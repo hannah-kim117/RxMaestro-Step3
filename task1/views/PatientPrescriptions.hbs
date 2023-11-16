@@ -32,7 +32,7 @@
 {{!-- Form to add a record to the table  --}}
 <h2>Add a Prescription</h2>
 <p>To add a new prescription, please enter the information below and click 'Submit'!</p>
-<form id="add-prescription-form-ajax">
+<form id="add-patientPrescription-form-ajax">
     <label for="input-dosage">Dosage: </label>
     <input type="text" name="input-dosage" id="input-dosage">
     
@@ -56,7 +56,7 @@
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_prescription.js"></script>
+<script src="./js/add_patientPrescription.js"></script>
 
 
 
@@ -71,7 +71,7 @@
         <tr>
             {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
             <th>
-                {{@key}}
+                {{@key}}        <!-- key name for the current iteration step -->
             </th>
             {{/each}}
             
@@ -95,31 +95,25 @@
         {{/each}}
     </tbody>
 </table>
-<script src="./js/delete_prescription.js"></script>
+<script src="./js/delete_patientPrescription.js"></script>
 
 
 {{!-- Form to update a record to the table  --}}
 <h2>Updating A Patient's Prescription Form</h2>
-<p>To update a specific user's homeworld select their name from the drop-down menu on the left and their desired homeworld from the drop down menu on the right</p>
-<form id="update-person-form-ajax">
+<form id="update-patientPrescription-form-ajax">
 
-    <label for="input-fullname">Full name: </label>
-    <select name="input-fullname" id="mySelect">
-        <option value="test">Select a Person</option>
-        {{#each data}}
-        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
-        {{/each}}
-    </select>
+    <label for="input-patientPrescriptionID">Prescription ID: </label>
+    <input type="number" name="input-patientPrescriptionID" id="input-patientPrescriptionID">
 
-    <label for="input-homeworld">Homeworld: </label>
-    <select name="input-homeworld" id="input-homeworld-update">
-        <option>Select a Planet</option>
-        {{#each planets}}
-        <option value="{{this.id}}">{{this.name}}</option>
+    <label for="input-patientID">Patient: </label>
+    <select name="input-patientID" id="input-patientID-update">
+        <option>Select a Patient:</option>
+        {{#each patients}}
+        <option value="{{this.patientID}}">{{this.patientName}}</option>
         {{/each}}
     </select>
     <input type="submit">
 
 </form>
 
-<script src="./js/update_person.js"></script>
+<script src="./js/update_patientPrescription.js"></script>
