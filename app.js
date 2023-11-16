@@ -33,8 +33,20 @@ app.get('/manufacturers', function(req, res){
 
 app.get('/patient-prescriptions', function(req, res){
     let query1 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
+    let query2 = "SELECT * FROM Patients";
+    let query3 = "SELECT * FROM Drugs";
+
     db.pool.query(query1, function(error, rows, fields) {
-        res.render('PatientPrescriptions', {data: rows});
+        let patientPrescriptions = rows;
+
+        db.pool.query(query2, (error, rows, fields) => {
+            let patients = rows;
+
+            db.pool.query(query3, (error, rows, fields) => {
+                let drugs = rows;
+                return res.render('PatientPrescriptions', {data: patientPrescriptions, patients: patients, drugs: drugs});
+            });
+        });
     });
 });
 
