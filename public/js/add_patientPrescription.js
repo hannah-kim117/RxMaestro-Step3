@@ -1,3 +1,5 @@
+print("Entered function")
+
 let addPatientPrescriptionForm = document.getElementByID('add-patientPrescription-form-ajax');
 
 addPatientPrescriptionForm.addEventListener("submit", function (e){
@@ -13,9 +15,9 @@ addPatientPrescriptionForm.addEventListener("submit", function (e){
         drugID: inputDrugID.value,
         patientID: inputPatientID.value
     }
-
+    print(`Data: ${data}`)
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-patient-prescription", true);
+    xhttp.open("POST", "/add-patient-prescription/", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve

@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9615;
+PORT = 9618;
 var db = require('./database/db-connector');
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
@@ -113,6 +113,23 @@ app.post('/add-patient-prescription', function(req, res)
     })
 });
 
+app.delete('/delete-patient-prescription/', function(req,res,next){
+    let data = req.body;
+    let patientPrescriptionID = parseInt(data.id);
+    let deletePatientPrescription = `DELETE FROM PatientPrescriptions
+    WHERE patientPrescriptionID = ${patientPrescriptionID};`;
+    
+    db.pool.query(deletePatientPrescription, function(errow, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
+  
+    
 // Listener
 app.listen(PORT, function(){
     console.log("Express started on http://localhost:" + PORT + "; press Ctrl-C to terminate.");
