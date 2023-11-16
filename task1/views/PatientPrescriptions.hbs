@@ -1,0 +1,125 @@
+<!-- PatientPrescriptions.hbs -->
+
+<head>
+    <title>Patient Prescriptions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Patient Prescriptions</h1>
+    [ 
+    <a href="Home.html">Home</a>
+    |
+    <a href="Patients.html">Patients</a>
+    | 
+    <a href="PatientPrescriptions.html">Patient Prescriptions</a>
+    |
+    <a href="DrugsInteractions.html">Drug Interactions</a>
+    |
+    <a href="Drugs.html">Drugs</a>
+    |
+    <a href="Manufacturers.html">Manufacturers</a>
+    |
+    <a href="DrugInteractionSources.html">Drug Interaction Sources</a>
+    ]
+
+    <div id="browse" style="display: block;">
+            <p>
+                <strong>Browse Patient Prescriptions</strong>
+            </p>
+
+
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Prescription</h2>
+<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
+<form id="add-prescription-form-ajax">
+    <label for="input-dosage">Dosage: </label>
+    <input type="text" name="input-dosage" id="input-dosage">
+    
+    <label for="input-drugID">drugID: </label>
+    <select name="input-drugID" id="input-drugID-ajax">
+        <option value="">Select a Drug</option>
+        {{#each drugs}}
+        <option value="{{this.drugID}}">{{this.drugName}}</option>
+        {{/each}}
+    </select>   
+
+    <label for="input-patientID">patientID: </label>
+    <select name="input-patientID" id="input-patientID-ajax">
+        <option value="">Select a Patient</option>
+        {{#each patients}}
+        <option value="{{this.patientID}}">{{this.patientName}}</option>
+        {{/each}}
+    </select>   
+
+    <input type="submit">
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./js/add_prescription.js"></script>
+
+
+
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="prescription-table">
+
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            <th>
+                {{@key}}
+            </th>
+            {{/each}}
+            
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.patientPrescriptionID}}</td>
+            <td>{{this.dosage}}</td>
+            <td>{{this.drugID}}</td>
+            <td>{{this.patientID}}</td>
+            
+            <td><button onclick="deletePrescription({{this.patientPrescriptionID}})">Delete</button></td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+<script src="./js/delete_prescription.js"></script>
+
+
+{{!-- Form to update a record to the table  --}}
+<h2>Updating A Patient's Prescription Form</h2>
+<p>To update a specific user's homeworld select their name from the drop-down menu on the left and their desired homeworld from the drop down menu on the right</p>
+<form id="update-person-form-ajax">
+
+    <label for="input-fullname">Full name: </label>
+    <select name="input-fullname" id="mySelect">
+        <option value="test">Select a Person</option>
+        {{#each data}}
+        <option value="{{this.id}}">{{this.fname}} {{this.lname}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-homeworld">Homeworld: </label>
+    <select name="input-homeworld" id="input-homeworld-update">
+        <option>Select a Planet</option>
+        {{#each planets}}
+        <option value="{{this.id}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+    <input type="submit">
+
+</form>
+
+<script src="./js/update_person.js"></script>
