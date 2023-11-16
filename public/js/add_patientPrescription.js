@@ -61,6 +61,7 @@ addRowToTable = (data) => {
     let patientIDCell = document.createElement("TD");
     let drugNameCell = document.createElement("TD");
     let patientNameCell = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.patientPrescriptionID;
@@ -70,6 +71,12 @@ addRowToTable = (data) => {
     drugNameCell.innerText = newRow.drugName;
     patientNameCell.innerText = newRow.name
 
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deletePatientPrescription(newRow.patientPrescriptionID)
+    }
+
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(dosageCell);
@@ -77,7 +84,10 @@ addRowToTable = (data) => {
     row.appendChild(patientIDCell);
     row.appendChild(drugNameCell);
     row.appendChild(patientNameCell);
+    row.appendChild(deleteCell);
     
+    row.setAttribute('data-value', newRow.patientPrescriptionID);
+
     // Add the row to the table
     currentTable.appendChild(row);
 }
