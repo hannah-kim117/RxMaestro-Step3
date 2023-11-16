@@ -86,9 +86,11 @@
         {{#each data}}
         <tr>
             <td>{{this.patientPrescriptionID}}</td>
-            <td>{{this.patientID}}</td>
-            <td>{{this.drugID}}</td>
             <td>{{this.dosage}}</td>
+            <td>{{this.drugID}}</td>
+            <td>{{this.patientID}}</td>
+            
+            
             
             
             <td><button onclick="deletePrescription({{this.patientPrescriptionID}})">Delete</button></td>
