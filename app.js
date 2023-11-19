@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9623;
+PORT = 9843;
 var db = require('./database/db-connector');
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');

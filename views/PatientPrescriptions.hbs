@@ -54,7 +54,7 @@
         {{/each}}
     </select>   
 
-    <input type="submit">
+    <button type="submit" id ="add-button">Submit</button>
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
@@ -93,9 +93,6 @@
             <td>{{this.patientID}}</td>
             <td>{{this.drugName}}</td>
             <td>{{this.name}}</td>
-            
-            
-            
             
             <td><button onclick="deletePrescription({{this.patientPrescriptionID}})">Delete</button></td>
         </tr>

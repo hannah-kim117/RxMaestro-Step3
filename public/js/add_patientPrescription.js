@@ -1,6 +1,6 @@
-let addPatientPrescriptionForm = document.getElementByID('add-patientPrescription-form-ajax');
+let addPatientButton = document.getElementById('add-button');
 
-addPatientPrescriptionForm.addEventListener("submit", function (e){
+addPatientButton.addEventListener("click", function (e){
 
     e.preventDefault();
 
