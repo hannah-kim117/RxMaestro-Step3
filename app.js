@@ -179,8 +179,77 @@ app.put('/update-patient-prescription', function(req,res,next){
                 }
             })
         }
-  })});
-  
+})});
+
+/*                              Drugs Sources                               */
+
+app.post('/add-drug', function(req, res) { 
+    console.log("Adding drug");
+});
+
+app.delete('/delete-drug', function(req,res,next) {
+    console.log("Deleting drug");
+});
+
+app.put('/update-drug', function(req,res,next) {
+    console.log("Updating drug");
+});
+
+/*                              Drug Interaction Sources                      */
+
+app.post('/add-drug-interaction-source', function(req, res) { 
+    console.log("Adding drug interaction source");
+});
+
+app.delete('/delete-drug-interaction-source', function(req,res,next) {
+    console.log("Deleting drug interaction source");
+});
+
+app.put('/update-drug-interaction-source', function(req,res,next) {
+    console.log("Updating drug interaction source");
+});
+
+/*                              Drug Interactions                             */
+
+app.post('/add-drug-interaction', function(req, res) { 
+    console.log("Adding drug-interaction");
+});
+
+app.delete('/delete-drug-interaction', function(req,res,next) {
+    console.log("Deleting drug-interaction");
+});
+
+app.put('/update-drug-interaction', function(req,res,next) {
+    console.log("Updating drug-interaction");
+});
+
+/*                              Manufacturers                                 */
+
+app.post('/add-manufacturer', function(req, res) { 
+    console.log("Adding manufacturer");
+});
+
+app.delete('/delete-manufacturer', function(req,res,next) {
+    console.log("Deleting manufacturer");
+});
+
+app.put('/update-manufacturer', function(req,res,next) {
+    console.log("Updating manufacturer");
+});
+
+/*                              Patients                                    */
+
+app.post('/add-patient', function(req, res) { 
+    console.log("Adding patient");
+});
+
+app.delete('/delete-patient', function(req,res,next) {
+    console.log("Deleting patient");
+});
+
+app.put('/update-patient', function(req,res,next) {
+    console.log("Updating patient");
+});
     
 // Listener
 app.listen(PORT, function(){
