@@ -2,52 +2,25 @@
 
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-<head>
-    <title>Patient Prescriptions</title>
-   
-</head>
-<body>
-    <h1>Patient Prescriptions</h1>
-    [ 
-    <a href="/">Home</a>
-    |
-    <a href="patients">Patients</a>
-    | 
-    <a href="patient-prescriptions">Patient Prescriptions</a>
-    |
-    <a href="drug-interaction-sources">Drug Interactions</a>
-    |
-    <a href="drugs">Drugs</a>
-    |
-    <a href="manufacturers">Manufacturers</a>
-    |
-    <a href="drug-interaction-sources">Drug Interaction Sources</a>
-    ]
-
-    <div id="browse" style="display: block;">
-            <p>
-                <strong>Browse Patient Prescriptions</strong>
-            </p>
-
-
+<h1>Patient Prescriptions</h1>
 
 {{!-- Form to add a record to the table  --}}
 <h2>Add a Prescription</h2>
 <p>To add a new prescription, please enter the information below and click 'Submit'!</p>
 <form id="add-patientPrescription-form-ajax">
-    <label for="input-dosage">Dosage: </label>
-    <input type="text" name="input-dosage" id="input-dosage" required>
+    <label for="input-dosage-ADD">Dosage: </label>
+    <input type="text" name="input-dosage-ADD" id="input-dosage-ADD" required>
     
-    <label for="input-drugID">drugID: </label>
-    <select name="input-drugID" id="input-drugID-ajax">
+    <label for="input-drugID-ADD">drugID: </label>
+    <select name="input-drugID-ADD" id="input-drugID-ADD">
         <option value="">Select a Drug</option>
         {{#each drugs}}
         <option value="{{this.drugID}}">{{this.drugName}}</option>
         {{/each}}
     </select>   
 
-    <label for="input-patientID">patientID: </label>
-    <select name="input-patientID" id="input-patientID-ajax">
+    <label for="input-patientID-ADD">patientID: </label>
+    <select name="input-patientID-ADD" id="input-patientID-ADD">
         <option value="">Select a Patient</option>
         {{#each patients}}
         <option value="{{this.patientID}}">{{this.name}}</option>
@@ -58,7 +31,7 @@
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="../public/js/add_patientPrescription.js"></script>
+<script src="./add_patientPrescription.js" type="application/javascript"></script>
 
 
 
@@ -99,38 +72,37 @@
         {{/each}}
     </tbody>
 </table>
-<script src="../public/js/delete_patientPrescription.js"></script>
+<script src="./delete_patientPrescription.js" type="application/javascript"></script>
 
 
 {{!-- Form to update a record to the table  --}}
 <h2>Updating A Patient's Prescription Form</h2>
 <form id="update-patientPrescription-form-ajax">
 
-    <label for="input-patientPrescriptionID">Prescription ID: </label>
-    <input type="number" name="input-patientPrescriptionID" id="input-patientPrescriptionID" required>
+    <label for="input-patientPrescriptionID-UPDATE">Prescription ID: </label>
+    <input type="number" name="input-patientPrescriptionID-UPDATE" id="input-patientPrescriptionID-UPDATE" required>
 
-    <label for="input-patientID">Patient: </label>
-    <select name="input-patientID" id="input-patientID-update">
+    <label for="input-patientID-UPDATE">Patient: </label>
+    <select name="input-patientID-UPDATE" id="input-patientID-UPDATE">
         <option>Select a Patient:</option>
         {{#each patients}}
-        <option value="{{this.patientID}}">{{this.patientName}}</option>
+        <option value="{{this.patientID}}">{{this.name}}</option>
         {{/each}}
     </select>
 
-    <label for="input-drugID">Drug: </label>
-    <select name="input-drugID" id="input-drugID-update">
+    <label for="input-drugID-UPDATE">Drug: </label>
+    <select name="input-drugID-UPDATE" id="input-drugID-UPDATE">
         <option value="Null" disabled selected>Select a Drug:</option>
         {{#each drugs}}
         <option value="{{this.drugID}}">{{this.drugName}}</option>
         {{/each}}
     </select>
 
-    <label for="input-dosage">Dosage: </label>
-    <input type="text" name="input-dosage" id="input-dosage" required>
-
-
+    <label for="input-dosage-UPDATE">Dosage: </label>
+    <input type="text" name="input-dosage-UPDATE" id="input-dosage-UPDATE" required>
+    
     <input type="submit">
 
 </form>
 
-<script src="../public/js/update_patientPrescription.js"></script>
+<script src="./update_patientPrescription.js" type="application/javascript"></script>

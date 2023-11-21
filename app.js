@@ -2,11 +2,17 @@
 var express = require('express');
 var app = express();
 PORT = 9843;
+
 var db = require('./database/db-connector');
+
 const { engine } = require('express-handlebars');
 var exphbs = require('express-handlebars');
 app.engine('.hbs', engine({extname: ".hbs"}));
 app.set('view engine', '.hbs');
+
+app.use(express.json())
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(__dirname + '/public')); 
 
 
 // Routes
@@ -64,6 +70,8 @@ app.post('/add-patient-prescription', function(req, res)
     console.log("Entered Patient Prescriptions ADD");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
 
     // Capture NULL values
     let dosage = data.dosage;
@@ -72,17 +80,12 @@ app.post('/add-patient-prescription', function(req, res)
         dosage = 'NULL'
     }
 
-    let drugID = data.drugID;
-    let patientID = data.patientID;
-
+    let drugID = parseInt(data.drugID);
+    let patientID = parseInt(data.patientID);
+    console.log(`patientID, drugID, dosage: '${drugID}', '${patientID}', '${dosage}'`);
     // Create the query and run it on the database
-    query1 = `INSERT INTO PatientPrescriptions (patientID, drugID, dosage)
-    VALUES 
-    (
-        ${patientID},
-        ${drugID},
-        ${dosage}
-    )`;
+    query1 = `INSERT INTO PatientPrescriptions (patientID, drugID, dosage) VALUES ('${patientID}', '${drugID}', '${dosage}')`;
+
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -119,9 +122,9 @@ app.delete('/delete-patient-prescription', function(req,res,next){
     let data = req.body;
     let patientPrescriptionID = parseInt(data.id);
     let deletePatientPrescription = `DELETE FROM PatientPrescriptions
-    WHERE patientPrescriptionID = ${patientPrescriptionID};`;
+    WHERE patientPrescriptionID = '${patientPrescriptionID}'`;
     
-    db.pool.query(deletePatientPrescription, function(errow, rows, fields){
+    db.pool.query(deletePatientPrescription, function(error, rows, fields){
         if (error) {
             console.log(error);
             res.sendStatus(400);
@@ -133,46 +136,49 @@ app.delete('/delete-patient-prescription', function(req,res,next){
 
 app.put('/update-patient-prescription', function(req,res,next){
     console.log("Updating prescription");
+    console.log(`Update req: ${req.body}`);
+    console.log(`Update res: ${res.body}`);
     let data = req.body;
   
-     // Capture NULL values
-     let dosage = data.dosage;
-     if (!dosage)
-     {
-         dosage = 'NULL'
-     }
- 
-     let drugID = parseInt(data.drugID);
-     let patientID = parseInt(data.patientID);
-     let patientPrescriptionID = parseInt(data.patientPrescriptionID);
+    // Capture NULL values
+    let dosage = data.dosage;
+    if (!dosage)
+    {
+        dosage = 'NULL'
+    }
+
+    let drugID = parseInt(data.drugID);
+    let patientID = parseInt(data.patientID);
+    let patientPrescriptionID = parseInt(data.patientPrescriptionID);
   
-    let queryUpdatePrescription = `UPDATE PatientPrescriptions SET patientID = ${patientID}, drugID = ${drugID}, dosage = ${dosage} WHERE patientPrescriptionID = ${patientPrescriptionID}`;
+    let queryUpdatePrescription = `UPDATE PatientPrescriptions SET patientID = '${patientID}', drugID = '${drugID}', dosage = '${dosage}' WHERE patientPrescriptionID = '${patientPrescriptionID}'`;
     let query2 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
   
-          // Run the 1st query
-          db.pool.query(queryUpdatePrescription, function(error, rows, fields){
-              if (error) {
-  
-              // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-              console.log(error);
-              res.sendStatus(400);
-              }
-  
-              // If there was no error, we run our second query and return that data so we can use it to update the people's
-              // table on the front-end
-              else
-              {
-                  // Run the second query
-                  db.pool.query(query2, function(error, rows, fields) {
-  
-                      if (error) {
-                          console.log(error);
-                          res.sendStatus(400);
-                      } else {
-                          res.send(rows);
-                      }
-                  })
-              }
+    // Run the 1st query
+    db.pool.query(queryUpdatePrescription, function(error, rows, fields){
+        if (error) {
+
+        // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+        console.log(error);
+        res.sendStatus(400);
+        }
+
+        // If there was no error, we run our second query and return that data so we can use it to update the people's
+        // table on the front-end
+        else
+        {
+            // Run the second query
+            db.pool.query(query2, function(error, rows, fields) {
+
+                if (error) {
+                    console.log(error);
+                    res.sendStatus(400);
+                } else {
+                console.log(`Sending rows: ${rows}`);
+                    res.send(rows);
+                }
+            })
+        }
   })});
   
     

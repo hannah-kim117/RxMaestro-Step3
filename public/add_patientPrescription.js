@@ -4,10 +4,10 @@ addPatientButton.addEventListener("click", function (e){
 
     e.preventDefault();
 
-    let inputDosage = document.getElementById("input-dosage");
-    let inputDrugID = document.getElementById("input-drugID-ajax");
-    let inputPatientID = document.getElementById("input-patientID-ajax");
-
+    let inputDosage = document.getElementById("input-dosage-ADD");
+    let inputDrugID = document.getElementById("input-drugID-ADD");
+    let inputPatientID = document.getElementById("input-patientID-ADD");
+    
     let data = {
         dosage: inputDosage.value,
         drugID: inputDrugID.value,
