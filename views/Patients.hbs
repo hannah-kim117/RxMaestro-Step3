@@ -1,34 +1,27 @@
 <!-- Patients.hbs -->
 
-<head>
-    <title>Patients</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Patients</h1>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-    <div id="browse" style="display: block;">
-            <p>
-                <strong>Browse Patients</strong>
-            </p>
-
-
+<h1>Patients</h1>
 
 {{!-- Form to add a record to the table  --}}
 <h2>Add a Patient</h2>
+<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
 <form id="add-patient-form-ajax">
-    <label for="input-name">Name: </label>
-    <input type="text" name="input-name" id="input-name">
-    
-    <label for="input-phoneNumber">Phone Number: </label>
-    <input type="text" name="input-phoneNumber" id="input-phoneNumber">
-
-    
-    <input type="submit">
+    <label for="input-patientID-ADD">Patient: </label>
+    <select name="input-patientID-ADD" id="input-patientID-ADD">
+        <option value="">Select a Patient</option>
+        {{#each patients}}
+        <option value="{{this.patientID}}">{{this.name}}</option>
+        {{/each}}
+    </select>     
+    <label for="input-phoneNumber-ADD">Phone Number: </label>
+    <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
+    <button type="submit" id ="add-button">Submit</button>
 </form>
 
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./js/add_patient.js"></script>
+<script src="./add_Patients.js" type="application/javascript"></script>
 
 
 
