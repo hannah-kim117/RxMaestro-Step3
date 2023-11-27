@@ -1,76 +1,65 @@
-<html>
+<!-- Manufacturers.hbs -->
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h1>Manufacturers</h1>
+
+{{!-- Form to add a record to the table  --}}
+
+<h2>Add a Manufacturer</h2>
+<p>To add a new manufacturer, please enter the information below and click 'Submit'!</p>
+<form id="add-manufacturer-form-ajax">
+    <label for="input-manufacturerID-ADD">Manufacturer ID: </label>
+    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
+        <option value="">Select a Manufacturer</option>
+        {{#each manufacturers}}
+        <option value="{{this.manufacturerID}}">{{this.name}}</option>
+        {{/each}}
+    </select>
+
+    <label for="input-phoneNumber-ADD">Phone Number: </label>
+        <input type="number" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
+ 
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_Manufacturers.js" type="application/javascript"></script>
 
 
 
-<head>
-    <title>Manufacturers</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Manufacturers</h1>
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="manufacturer-table">
 
-    <div id="browse" style="display: block;">
-        <p>
-            <strong>Browse Manufacturers</strong>
-        </p>
-        <table border="1" cellpadding="5">
-            <tbody>
-                <tr>
-                    <th>
-                        <a href="#" onclick="newDrug()">Add</a>
-                    </th>
-                    
-                    <th>manufacturerID</th>
-                    <th>name</th>
-                    <th>phoneNumber</th>
-                    
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>1</td>
-                    <td>Pfizer</td>
-                    <td>111-1111-1111</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>2</td>
-                    <td>Johnson & Johnson</td>
-                    <td>222-2222-2222</td>
-                </tr>
-                <tr>
-                   <td></td>
-                    <td>3</td>
-                    <td>Zoetis</td>
-                    <td>333-3333-3333</td>
-                </tr>
-                
-            </tbody>
-        </table>
-        <p>&nbsp;</p>
-    </div>
+    {{!-- Header section --}}
+    <thead>
 
-    <!-- add Manufacturer -->
-    <div id="insert" style="display: block;">
-        <form action="POST" id="addManufacturer">
-            <legend>
-                <strong>Add Manufacturer</strong>
-            </legend>
-            <fieldset>
-                <label for="manufacturerID">manufacturerID:</label>
-                <input type="text">
-                <label for="name">name:</label>
-                <input type="text">
-                <label for="phoneNumber">phoneNumber</label>
-                <input type="text">
-                
-            </fieldset>
-            <input type="submit" class="btn" id="addManufacturer" value="Add Manufacturer">
-            <input type="button" class="btn" onclick="browseManufacturer()" value="Cancel">
-        </form>
-    </div>
-    
-  
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            <th>
+                {{@key}}        <!-- key name for the current iteration step -->
+            </th>
+            {{/each}}
+            
+        </tr>
+    </thead>
 
-</body>
+    {{!-- Body section --}}
+    <tbody>
 
-</html>
+        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.manufacturerID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.phoneNumber}}</td>
+           
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
+
