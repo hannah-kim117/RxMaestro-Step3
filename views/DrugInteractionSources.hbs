@@ -1,69 +1,57 @@
-<html>
+<!-- DrugInteractionSources.hbs -->
 
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
+<h1>Drug Interaction Sources</h1>
 
-<head>
-    <title>Drug Interaction Sources</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Drug Interaction Sources</h1>
-
-    <div id="browse" style="display: block;">
-        <p>
-            <strong>Browse Sources</strong>
-        </p>
-        <table border="1" cellpadding="5">
-            <tbody>
-                <tr>
-                    <th>
-                        <a href="#" onclick="newDrug()">Add</a>
-                    </th>
-                    
-                    <th>sourceName</th>
-                    <th>url</th>
-                   
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>ONCHigh</td>
-                    <td>https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/
-
-                    </td>
-                   
-                </tr>
-                <tr>
-                   <td></td>
-                    <td>DrugBank</td>
-                    <td>https://go.drugbank.com/
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <p>&nbsp;</p>
-    </div>
-
-    <!-- add source -->
-    <div id="insert" style="display: block;">
-        <form action="POST" id="addSource">
-            <legend>
-                <strong>Add Source</strong>
-            </legend>
-            <fieldset>
-                <label for="sourceName">sourceName:</label>
-                <input type="text">
-                <label for="url">url:</label>
-                <input type="text">
-                
-            </fieldset>
-            <input type="submit" class="btn" id="addSource" value="Add Source">
-            <input type="button" class="btn" onclick="browseSource()" value="Cancel">
-        </form>
-    </div>
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Source</h2>
+<p>To add a new source, please enter the information below and click 'Submit'!</p>
+<form id="add-drug-interaction-source-form-ajax">
+    <label for="input-sourceName-ADD">Source Name: </label>
+    <input type="text" name="input-sourceName-ADD" id="input-sourceName-ADD" required>
     
+    <label for="input-url-ADD">URL: </label>
+    <input type="text" name="input-url-ADD" id="input-url-ADD" required>
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_DrugInteractionSources.js" type="application/javascript"></script>
 
 
 
-</body>
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="prescription-table">
 
-</html>
+    {{!-- Header section --}}
+    <thead>
+
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            <th>
+                {{@key}}        <!-- key name for the current iteration step -->
+            </th>
+            {{/each}}
+            
+        </tr>
+    </thead>
+
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.sourceName}}</td>
+            <td>{{this.url}}</td>
+            
+            
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+
