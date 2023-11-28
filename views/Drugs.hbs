@@ -1,80 +1,61 @@
-<html>
+<!-- Drugs.hbs -->
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+<h1>Drugs</h1>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Drug</h2>
+<p>To add a new drug, please enter the information below and click 'Submit'!</p>
+<form id="add-drug-form-ajax">
+    <label for="input-drugID-ADD">Drug RXCUI: </label>
+    <input type="text" name="input-drugID-ADD" id="input-drugID-ADD" required>   
+    <label for="input-drugName-ADD">Drug Name: </label>
+    <input type="text" name="input-drugName-ADD" id="input-drugName-ADD" required>
+    <label for="input-manufacturerID-ADD">Manufacturer: </label>
+    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
+        <option value="">Select a Manufacturer</option>
+        {{#each manufacturers}}
+        <option value="{{this.manufacturerID}}">{{this.name}}</option>
+        {{/each}}
+    </select>  
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_drug.js" type="application/javascript"></script>
 
 
 
-<head>
-    <title>Drugs</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h1>Drugs</h1>
+{{!-- Create a table --}}
+<table border="1" cellpadding="5" id="drug-table">
 
-    <div id="browse" style="display: block;">
-        <p>
-            <strong>Browse Drugs</strong>
-        </p>
-        <table border="1" cellpadding="5">
-            <tbody>
-                <tr>
-                    <th>
-                        <a href="#" onclick="newDrug()">Add</a>
-                    </th>
-                    
-                    <th>drugID</th>
-                    <th>drugName</th>
-                    <th>manufacturerID</th>
-                    
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>153008</td>
-                    <td>Ibuprofen</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                   <td></td>
-                    <td>1546056</td>
-                    <td>Furosemide</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>7646</td>
-                    <td>Omeprazole</td>
-                    <td>3</td>
-                </tr>
-                <tr>
-                    <td></td>
-                    <td>3827</td>
-                    <td>Enalapril</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table>
-        <p>&nbsp;</p>
-    </div>
+    {{!-- Header section --}}
+    <thead>
 
-    <!-- add drug -->
-    <div id="insert" style="display: block;">
-        <form action="POST" id="addDrug">
-            <legend>
-                <strong>Add Drug</strong>
-            </legend>
-            <fieldset>
-                <label for="drugID">drugID:</label>
-                <input type="text">
-                <label for="drugName">drugName:</label>
-                <input type="text">
-                <label for="manufacturerID">Manufacturer ID</label>
-                <input type="text">
-                
-            </fieldset>
-            <input type="submit" class="btn" id="addDrug" value="Add Drug">
-            <input type="button" class="btn" onclick="browseDrug()" value="Cancel">
-        </form>
-    </div>
-    
-    
-</body>
+        {{!-- For just the first row, we print each key of the row object as a header cell so we
+        know what each column means when the page renders --}}
+        <tr>
+            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            <th>
+                {{@key}}        <!-- key name for the current iteration step -->
+            </th>
+            {{/each}}
+            
+        </tr>
+    </thead>
 
-</html>
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.drugID}}</td>
+            <td>{{this.drugName}}</td>
+            <td>{{this.manufacturerID}}</td>
+            <td>{{this.name}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
