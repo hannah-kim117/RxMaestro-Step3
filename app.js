@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9843;
+PORT = 9857;
 
 var db = require('./database/db-connector');
 
@@ -40,11 +40,15 @@ app.get('/drug-interaction-sources', function(req, res){
 });
 
 app.get('/drugs', function(req, res){
-    let query1 = "SELECT drugID, drugName, manufacturerID FROM Drugs";
+    let query1 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
+    let query2 = "SELECT * FROM Manufacturers";
 
     db.pool.query(query1, (error, rows, fields) => {
         let data = rows;
-        return res.render('Drugs', {data: data});
+        db.pool.query(query2, (error, rows, fields) => {
+            let manufacturers = rows;
+            return res.render('Drugs', {data: data, manufacturers: manufacturers});
+        });     
     });
 });
 
