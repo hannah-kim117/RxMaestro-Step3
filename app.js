@@ -22,19 +22,39 @@ app.get('/', function(req, res){
 });
 
 app.get('/drug-interactions', function(req, res){
-    res.render('DrugInteractions');
+    let query1 = "SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions";
+
+    db.pool.query(query1, (error, rows, fields) => {
+        let data = rows;
+        return res.render('DrugInteractions', {data: data});
+    });
 });
 
 app.get('/drug-interaction-sources', function(req, res){
-    res.render('DrugInteractionSources');
+    let query1 = "SELECT sourceName, url FROM DrugInteractionSources";
+
+    db.pool.query(query1, (error, rows, fields) => {
+        let data = rows;
+        return res.render('DrugInteractionSources', {data: data});
+    });
 });
 
 app.get('/drugs', function(req, res){
-    res.render('Drugs');
+    let query1 = "SELECT drugID, drugName, manufacturerID FROM Drugs";
+
+    db.pool.query(query1, (error, rows, fields) => {
+        let data = rows;
+        return res.render('Drugs', {data: data});
+    });
 });
 
 app.get('/manufacturers', function(req, res){
-    res.render('Manufacturers');
+    let query1 = "SELECT manufacturerID, name, phoneNumber FROM Manufacturers";
+
+    db.pool.query(query1, (error, rows, fields) => {
+        let data = rows;
+        return res.render('Manufacturers', {data: data});
+    });
 });
 
 app.get('/patient-prescriptions', function(req, res){
@@ -58,7 +78,12 @@ app.get('/patient-prescriptions', function(req, res){
 });
 
 app.get('/patients', function(req, res){
-    res.render('Patients');
+    let query1 = "SELECT patientID, name, phoneNumber FROM Patients";
+
+    db.pool.query(query1, (error, rows, fields) => {
+        let data = rows;
+        return res.render('Patients', {data: data});
+    });
 });
 
 /* CRUD Operations */
