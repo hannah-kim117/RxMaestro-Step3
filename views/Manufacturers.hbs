@@ -9,13 +9,9 @@
 <h2>Add a Manufacturer</h2>
 <p>To add a new manufacturer, please enter the information below and click 'Submit'!</p>
 <form id="add-manufacturer-form-ajax">
-    <label for="input-manufacturerID-ADD">Manufacturer ID: </label>
-    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
-        <option value="">Select a Manufacturer</option>
-        {{#each manufacturers}}
-        <option value="{{this.manufacturerID}}">{{this.name}}</option>
-        {{/each}}
-    </select>
+    <label for="input-manufacturerID-ADD">Manufacturer Name: </label>
+    <input type="text" name="input-manufacturer-ADD" id="input-manufacturer-ADD" required>
+
 
     <label for="input-phoneNumber-ADD">Phone Number: </label>
         <input type="number" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
