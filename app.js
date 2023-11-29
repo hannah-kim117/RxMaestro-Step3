@@ -22,11 +22,19 @@ app.get('/', function(req, res){
 });
 
 app.get('/drug-interactions', function(req, res){
-    let query1 = "SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions";
+    let query1 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+    let query2 = "SELECT drugName, drugID FROM Drugs";
+    let query3 = "SELECT sourceName FROM DrugInteractionSources";
 
     db.pool.query(query1, (error, rows, fields) => {
         let data = rows;
-        return res.render('DrugInteractions', {data: data});
+        db.pool.query(query2, (error, rows, fields) => {
+            let drugs = rows;
+            db.pool.query(query3, (error, rows, fields) => {
+                let sources = rows;
+                return res.render('DrugInteractions', {data: data, drugs: drugs, sources: sources});
+            }); 
+        });
     });
 });
 
