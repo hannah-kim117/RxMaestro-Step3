@@ -12,7 +12,7 @@
     <select name="input-drugID1-ADD" id="input-drugID1-ADD">
         <option value="">Select a Drug</option>
         {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugName}}</option>
+        <option value="{{this.drugID}}">{{this.drugID}}</option>
         {{/each}}
     </select>  
 
@@ -20,22 +20,22 @@
     <select name="input-drugID2-ADD" id="input-drugID2-ADD">
         <option value="">Select a Drug</option>
         {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugName}}</option>
+        <option value="{{this.drugID}}">{{this.drugID}}</option>
         {{/each}}
     </select>  
     
-    <label for="input-sourceName-ADD">drugID: </label>
+    <label for="input-sourceName-ADD">Interaction Source: </label>
     <select name="input-sourceName-ADD" id="input-sourceName-ADD">
         <option value="">Select a Source</option>
-        {{#each drugInteractionSources}}
+        {{#each sources}}
         <option value="{{this.sourceName}}">{{this.sourceName}}</option>
         {{/each}}
     </select>   
 
-    <label for="input-sideEffectDescription-ADD">Drug RXCUI: </label>
+    <label for="input-sideEffectDescription-ADD">Side Effects Description: </label>
     <input type="text" name="input-sideEffectDescription-ADD" id="input-sideEffectDescription-ADD">
 
-    <label for="input-sideEffectSeverity-ADD">Drug RXCUI: </label>
+    <label for="input-sideEffectSeverity-ADD">Side Effects Severity: </label>
     <input type="text" name="input-sideEffectSeverity-ADD" id="input-sideEffectSeverity-ADD">    
 
     <button type="submit" id ="add-button">Submit</button>
@@ -60,8 +60,6 @@
                 {{@key}}        <!-- key name for the current iteration step -->
             </th>
             {{/each}}
-            
-            <th>Delete</th>
         </tr>
     </thead>
 
@@ -76,10 +74,9 @@
             <td>{{this.drugName1}}</td>
             <td>{{this.drugID2}}</td>
             <td>{{this.drugName2}}</td>
-            <td>{{this.drugID1}}</td>
-            <td>{{this.source}}</td>
             <td>{{this.sideEffectDescription}}</td>
             <td>{{this.sideEffectSeverity}}</td>
+            <td>{{this.source}}</td>
         </tr>
         {{/each}}
     </tbody>
@@ -87,33 +84,33 @@
 
 
 {{!-- Form to update a record to the table  --}}
-<h2>Updating A Drug Interaction Form</h2>
+<h2>Update a Drug Interaction</h2>
+<p>To update a new drug interaction, please enter the information below and click 'Submit'!</p>
 <form id="update-drugInteraction-form-ajax">
-
-    <label for="input-patientPrescriptionID-UPDATE">Prescription ID: </label>
-    <input type="number" name="input-patientPrescriptionID-UPDATE" id="input-patientPrescriptionID-UPDATE" required>
-
-    <label for="input-patientID-UPDATE">Patient: </label>
-    <select name="input-patientID-UPDATE" id="input-patientID-UPDATE">
-        <option>Select a Patient:</option>
-        {{#each patients}}
-        <option value="{{this.patientID}}">{{this.name}}</option>
+    <label for="input-interactionID-UPDATE">drugID: </label>
+    <select name="input-interactionID-UPDATE" id="input-interactionID-UPDATE">
+        <option value="">Select a Source</option>
+        {{#each data}}
+        <option value="{{this.interactionID}}">{{this.interactionID}}</option>
         {{/each}}
-    </select>
+    </select>   
 
-    <label for="input-drugID-UPDATE">Drug: </label>
-    <select name="input-drugID-UPDATE" id="input-drugID-UPDATE">
-        <option value="Null" disabled selected>Select a Drug:</option>
-        {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugName}}</option>
+    <label for="input-sourceName-UPDATE">drugID: </label>
+    <select name="input-sourceName-UPDATE" id="input-sourceName-UPDATE">
+        <option value="">Select a Source</option>
+        {{#each drugInteractionSources}}
+        <option value="{{this.sourceName}}">{{this.sourceName}}</option>
         {{/each}}
-    </select>
+    </select>   
 
-    <label for="input-dosage-UPDATE">Dosage: </label>
-    <input type="text" name="input-dosage-UPDATE" id="input-dosage-UPDATE" required>
-    
-    <input type="submit">
+    <label for="input-sideEffectDescription-UPDATE">Drug RXCUI: </label>
+    <input type="text" name="input-sideEffectDescription-UPDATE" id="input-sideEffectDescription-UPDATE">
 
+    <label for="input-sideEffectSeverity-UPDATE">Drug RXCUI: </label>
+    <input type="text" name="input-sideEffectSeverity-UPDATE" id="input-sideEffectSeverity-UPDATE">    
+
+    <button type="submit" id ="UPDATE-button">Submit</button>
 </form>
 
-<script src="./update_patientPrescription.js" type="application/javascript"></script>
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./update_drugInteraction.js" type="application/javascript"></script>
