@@ -87,7 +87,7 @@
 <h2>Update a Drug Interaction</h2>
 <p>To update a new drug interaction, please enter the information below and click 'Submit'!</p>
 <form id="update-drugInteraction-form-ajax">
-    <label for="input-interactionID-UPDATE">drugID: </label>
+    <label for="input-interactionID-UPDATE">interactionID: </label>
     <select name="input-interactionID-UPDATE" id="input-interactionID-UPDATE">
         <option value="">Select a Source</option>
         {{#each data}}
@@ -95,18 +95,18 @@
         {{/each}}
     </select>   
 
-    <label for="input-sourceName-UPDATE">drugID: </label>
+    <label for="input-sourceName-UPDATE">Interaction Source: </label>
     <select name="input-sourceName-UPDATE" id="input-sourceName-UPDATE">
         <option value="">Select a Source</option>
-        {{#each drugInteractionSources}}
+        {{#each sources}}
         <option value="{{this.sourceName}}">{{this.sourceName}}</option>
         {{/each}}
     </select>   
 
-    <label for="input-sideEffectDescription-UPDATE">Drug RXCUI: </label>
+    <label for="input-sideEffectDescription-UPDATE">Side Effects Description: </label>
     <input type="text" name="input-sideEffectDescription-UPDATE" id="input-sideEffectDescription-UPDATE">
 
-    <label for="input-sideEffectSeverity-UPDATE">Drug RXCUI: </label>
+    <label for="input-sideEffectSeverity-UPDATE">Side Effects Severity: </label>
     <input type="text" name="input-sideEffectSeverity-UPDATE" id="input-sideEffectSeverity-UPDATE">    
 
     <button type="submit" id ="UPDATE-button">Submit</button>
