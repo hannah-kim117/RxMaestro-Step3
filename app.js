@@ -302,7 +302,7 @@ app.post('/add-drug-interaction-source', function(req, res) {
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT * FROM DrugInteractionSources";
+            query2 = "SELECT sourceName, url FROM DrugInteractionSources";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -447,29 +447,108 @@ app.put('/update-drug-interaction', function(req,res,next) {
 
 app.post('/add-manufacturer', function(req, res) { 
     console.log("Adding manufacturer");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    // Capture NULL values
+    let manufacturerID = data.manufacturerID;
+    if (!manufacturerID) {
+        manufacturerID = 'NULL'
+    } else {
+        manufacturerID = parseInt(manufacturerID)
+    }
+
+    let manufacturerName = data.manufacturerName;
+    let phoneNumber = data.phoneNumber;
+    console.log(`manufacturerID, manufacturerName, phoneNumber: '${manufacturerID}', '${manufacturerName}', '${phoneNumber}'`);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Manufacturers (manufacturerID, manufacturerName, phoneNumber) VALUES ('${manufacturerID}', '${manufacturerName}', '${phoneNumber}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT manufacturerID, manufacturerName, phoneNumber FROM Manufacturers";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
-app.delete('/delete-manufacturer', function(req,res,next) {
-    console.log("Deleting manufacturer");
-});
-
-app.put('/update-manufacturer', function(req,res,next) {
-    console.log("Updating manufacturer");
-});
 
 /*                              Patients                                    */
 
 app.post('/add-patient', function(req, res) { 
     console.log("Adding patient");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    
+    let patientID = parseInt(data.patientID);
+    let patientName = data.patientName;
+    let phoneNumber = data.phoneNumber;
+    console.log(`patientID, patientName, phoneNumber: '${patientID}', '${patientName}', '${phoneNumber}'`);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Patients (patientID, patientName, phoneNumber) VALUES ('${patientID}', '${patientName}', '${phoneNumber}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT patientID, patientName, phoneNumber FROM Patients";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
-app.delete('/delete-patient', function(req,res,next) {
-    console.log("Deleting patient");
-});
 
-app.put('/update-patient', function(req,res,next) {
-    console.log("Updating patient");
-});
     
 // Listener
 app.listen(PORT, function(){
