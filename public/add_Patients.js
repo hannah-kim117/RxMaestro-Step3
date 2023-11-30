@@ -10,12 +10,12 @@ addPatientButton.addEventListener("click", function (e){
     
     let data = {
         patientID: inputPatientID.value,
-        patientName: inputPatientName.value,
+        name: inputPatientName.value,
         phoneNumber: inputPhoneNumber.value
     }
 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "/add-patient-prescription", true);
+    xhttp.open("POST", "/add-patient", true);
     xhttp.setRequestHeader("Content-type", "application/json");
 
     // Tell our AJAX request how to resolve
@@ -55,21 +55,22 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let patientNameCell = document.createElement("TD");
-    let nameCell = document.createElement("TD");
     let phoneNumberCell = document.createElement("TD");
+
+
     
 
     // Fill the cells with correct data
     idCell.innerText = newRow.patientID;
-    patientNameCell.innerText = newRow.patientName;
-    nameCell.innerText = newRow.name;
+    patientNameCell.innerText = newRow.name;
     phoneNumberCell.innerText = newRow.phoneNumber;
+    
+
 
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(patientNameCell);
-    row.appendChild(nameCell);
     row.appendChild(phoneNumberCell);
     
     row.setAttribute('data-value', newRow.patientID);
