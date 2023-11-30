@@ -78,87 +78,87 @@ CREATE OR REPLACE TABLE PatientPrescriptions (
     PRIMARY KEY (patientPrescriptionID)
 );
 
--- -- insert data into Manufacturers table
--- INSERT INTO Manufacturers (
---     name,
---     phoneNumber
--- )
--- VALUES 
--- (
---     "Pfizer", 
---     '111-1111-1111'
--- ),
--- (
---     "Johnson & Johnson", 
---     '222-2222-2222'
--- ),
--- (
---     "Zoetis", 
---     '333-3333-3333'
--- );
+-- insert data into Manufacturers table
+INSERT INTO Manufacturers (
+    name,
+    phoneNumber
+)
+VALUES 
+(
+    "Pfizer", 
+    '111-1111-1111'
+),
+(
+    "Johnson & Johnson", 
+    '222-2222-2222'
+),
+(
+    "Zoetis", 
+    '333-3333-3333'
+);
 
--- -- Insert data into Patients table
--- INSERT INTO Patients (
---     name,
---     phoneNumber
--- )
--- VALUES
--- (
---     "Bob White",
---     "121-212-1212"
--- ),
--- (
---     "John Smith",
---     "123-456-7890"
--- ),
--- (
---     "Anne Ko",
---     "000-111-2222"
--- );
+-- Insert data into Patients table
+INSERT INTO Patients (
+    name,
+    phoneNumber
+)
+VALUES
+(
+    "Bob White",
+    "121-212-1212"
+),
+(
+    "John Smith",
+    "123-456-7890"
+),
+(
+    "Anne Ko",
+    "000-111-2222"
+);
 
--- -- Insert data into DrugInteractionSources
--- INSERT INTO DrugInteractionSources (
---     sourceName,
---     url
--- )
--- VALUES
--- (
---     "ONCHigh",
---     "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/"
--- ),
--- (
---     "DrugBank",
---     "https://go.drugbank.com/"
+-- Insert data into DrugInteractionSources
+INSERT INTO DrugInteractionSources (
+    sourceName,
+    url
+)
+VALUES
+(
+    "ONCHigh",
+    "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3422823/"
+),
+(
+    "DrugBank",
+    "https://go.drugbank.com/"
 
--- );
+);
 
--- -- Insert data into Drugs
--- INSERT INTO Drugs (
---     drugID,
---     drugName,
---     manufacturerID
--- )
--- VALUES
--- (
---     153008,
---     "Ibuprofen",
---     (SELECT manufacturerID from Manufacturers where name = "Pfizer")
--- ),
--- (
---     1546056,
---     "Furosemide",
---     (SELECT manufacturerID from Manufacturers where name = "Johnson & Johnson")
--- ),
--- (
---     7646,
---     "Omeprazole",
---     (SELECT manufacturerID from Manufacturers where name = "Zoetis")
--- ),
--- (
---     3827,
---     "Enalapril",
---     (SELECT manufacturerID from Manufacturers where name = "Zoetis")
--- );
+-- Insert data into Drugs
+INSERT INTO Drugs (
+    drugID,
+    drugName,
+    manufacturerID
+)
+VALUES
+(
+    153008,
+    "Ibuprofen",
+    (SELECT manufacturerID from Manufacturers where name = "Pfizer")
+),
+(
+    1546056,
+    "Furosemide",
+    (SELECT manufacturerID from Manufacturers where name = "Johnson & Johnson")
+),
+(
+    7646,
+    "Omeprazole",
+    (SELECT manufacturerID from Manufacturers where name = "Zoetis")
+),
+(
+    3827,
+    "Enalapril",
+    (SELECT manufacturerID from Manufacturers where name = "Zoetis")
+);
 
 -- -- Insert data into PatientPrescriptions
 -- INSERT INTO PatientPrescriptions (
