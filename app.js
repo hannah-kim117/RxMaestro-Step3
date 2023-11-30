@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9857;
+PORT = 9617;
 
 var db = require('./database/db-connector');
 
@@ -277,15 +277,52 @@ app.post('/add-drug', function(req, res) {
 
 app.post('/add-drug-interaction-source', function(req, res) { 
     console.log("Adding drug interaction source");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    
+
+    let sourceName = data.sourceName;
+    let url = data.url;
+    console.log(`sourceName, url: '${sourceName}', '${url}'`);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO DrugInteractionSources (sourceName, url) VALUES ('${sourceName}', '${url}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT * FROM DrugInteractionSources";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
-app.delete('/delete-drug-interaction-source', function(req,res,next) {
-    console.log("Deleting drug interaction source");
-});
 
-app.put('/update-drug-interaction-source', function(req,res,next) {
-    console.log("Updating drug interaction source");
-});
 
 /*                              Drug Interactions                             */
 
