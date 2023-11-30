@@ -160,59 +160,59 @@ VALUES
     (SELECT manufacturerID from Manufacturers where name = "Zoetis")
 );
 
--- Insert data into PatientPrescriptions
-INSERT INTO PatientPrescriptions (
-    dosage,
-    drugID,
-    patientID
-)
-VALUES
-(
-    "50mg",
-    (SELECT drugID from Drugs where Drugs.drugName = "Omeprazole"),
-    (SELECT patientID from Patients where Patients.name = "Bob White")
-),
-(
-    "2ml",
-    (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
-    (SELECT patientID from Patients where Patients.name = "John Smith")
-),
-(
-    "35mg",
-    (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
-    (SELECT patientID from Patients where Patients.name = "Anne Ko")
-);
+-- -- Insert data into PatientPrescriptions
+-- INSERT INTO PatientPrescriptions (
+--     dosage,
+--     drugID,
+--     patientID
+-- )
+-- VALUES
+-- (
+--     "50mg",
+--     (SELECT drugID from Drugs where Drugs.drugName = "Omeprazole"),
+--     (SELECT patientID from Patients where Patients.name = "Bob White")
+-- ),
+-- (
+--     "2ml",
+--     (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
+--     (SELECT patientID from Patients where Patients.name = "John Smith")
+-- ),
+-- (
+--     "35mg",
+--     (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
+--     (SELECT patientID from Patients where Patients.name = "Anne Ko")
+-- );
 
--- Insert data into Interactions
-INSERT INTO DrugInteractions (
-    drugID1,
-    drugID2,
-    sideEffectDescription,
-    sideEffectSeverity,
-    source
-)
-VALUES
-(
-    (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
-    (SELECT drugID from Drugs where Drugs.drugName = "Omeprazole"),
-    "The metabolism of Ibuprofen can be decreased when combined with Omeprazole.",
-    "N/A",
-    (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
-),
-(
-    (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
-    (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
-    "The therapeutic efficacy of Furosemide can be decreased when used in combination with Ibuprofen",
-    "N/A",
-    (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
-),
-(
-    (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
-    (SELECT drugID from Drugs where Drugs.drugName = "Enalapril"),
-    "The risk or severity of renal failure and hypotension can be increased when Furosemide is combined with Enalapril.",
-    "Moderate",
-    (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
-);
+-- -- Insert data into Interactions
+-- INSERT INTO DrugInteractions (
+--     drugID1,
+--     drugID2,
+--     sideEffectDescription,
+--     sideEffectSeverity,
+--     source
+-- )
+-- VALUES
+-- (
+--     (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
+--     (SELECT drugID from Drugs where Drugs.drugName = "Omeprazole"),
+--     "The metabolism of Ibuprofen can be decreased when combined with Omeprazole.",
+--     "N/A",
+--     (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
+-- ),
+-- (
+--     (SELECT drugID from Drugs where Drugs.drugName = "Ibuprofen"),
+--     (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
+--     "The therapeutic efficacy of Furosemide can be decreased when used in combination with Ibuprofen",
+--     "N/A",
+--     (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
+-- ),
+-- (
+--     (SELECT drugID from Drugs where Drugs.drugName = "Furosemide"),
+--     (SELECT drugID from Drugs where Drugs.drugName = "Enalapril"),
+--     "The risk or severity of renal failure and hypotension can be increased when Furosemide is combined with Enalapril.",
+--     "Moderate",
+--     (SELECT sourceName from DrugInteractionSources where DrugInteractionSources.sourceName = "DrugBank")
+-- );
 
 
 
