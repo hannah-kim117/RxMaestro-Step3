@@ -48,7 +48,7 @@ app.get('/drug-interaction-sources', function(req, res){
 });
 
 app.get('/drugs', function(req, res){
-    let query1 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
+    let query1 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
     let query2 = "SELECT * FROM Manufacturers";
 
     db.pool.query(query1, (error, rows, fields) => {
@@ -222,6 +222,55 @@ app.put('/update-patient-prescription', function(req,res,next){
 
 app.post('/add-drug', function(req, res) { 
     console.log("Adding drug");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    // Capture NULL values
+    let manufacturerID = data.manufacturerID;
+    if (!manufacturerID) {
+        manufacturerID = 'NULL'
+    } else {
+        manufacturerID = parseInt(manufacturerID)
+    }
+
+    let drugID = parseInt(data.drugID);
+    let drugName = data.drugName;
+    console.log(`drugID, manufacturerID, drugName: '${drugID}', '${manufacturerID}', '${drugName}'`);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Drugs (drugID, drugName, manufacturerID) VALUES ('${drugID}', '${drugName}', '${manufacturerID}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
 app.delete('/delete-drug', function(req,res,next) {
