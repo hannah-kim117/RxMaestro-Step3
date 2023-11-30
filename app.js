@@ -348,12 +348,62 @@ app.post('/add-drug-interaction', function(req, res) {
     })
 });
 
-app.delete('/delete-drug-interaction', function(req,res,next) {
-    console.log("Deleting drug-interaction");
-});
-
 app.put('/update-drug-interaction', function(req,res,next) {
     console.log("Updating drug-interaction");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    // Capture NULL values
+    let source = data.source;
+    if (!source) {
+        source = 'NULL'
+    }
+    let sideEffectDescription = data.sideEffectDescription;
+    if (!sideEffectDescription) {
+        sideEffectDescription = 'NULL'
+    }
+    let sideEffectSeverity = data.sideEffectSeverity;
+    if (!sideEffectSeverity) {
+        sideEffectSeverity = 'NULL'
+    }
+
+    let interactionID = parseInt(data.interactionID);
+    console.log(`interactionID, source, description, severity: '${interactionID}', '${source}, ${sideEffectDescription}, ${sideEffectSeverity}'`);
+    // Create the query and run it on the database
+    query1 = `UPDATE DrugInteractions SET source = '${source}', sideEffectDescription = '${sideEffectDescription}', sideEffectSeverity = '${sideEffectSeverity}' WHERE interactionID = '${interactionID}'`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
 /*                              Manufacturers                                 */
