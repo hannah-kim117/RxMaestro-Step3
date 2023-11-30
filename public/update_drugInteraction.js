@@ -58,40 +58,43 @@ updateInteractionButton.addEventListener("click", function (e){
 });
 
 function updateRow(data, interactionID){
-    console.log(`Updating row ID=${interactionID}`);
+    console.log(`Updating row ID=${interactionID} ${typeof interactionID}`);
+    
     let parsedData = JSON.parse(data);
     
     let table = document.getElementById("drug-interaction-table");
     console.log('Found table');
+    console.log(`type of item looking for: ${typeof table.rows[1].getElementsByTagName("td")[0].innerHTML}`);
     
     for (let i = 1, row; row = table.rows[i]; i++) {
         console.log(row)
-    //    if (table.rows[i].getAttribute("data-value") == patientPrescriptionID) {
+
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == interactionID) {
+            console.log(`parsedRow: ${parsedData[i-1].interactionID}, ${parsedData[i-1].drugID1}, ${parsedData[i-1].drugName1}, ${parsedData[i-1].drugID2}, ${parsedData[i-1].drugName2}, ${parsedData[i-1].sideEffectDescription}, ${parsedData[i-1].sideEffectSeverity}, ${parsedData[i-1].source}`);
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Adjust columns
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            td1.innerHTML = parsedData[0].drugID1; 
+            td1.innerHTML = parsedData[i-1].drugID1; 
 
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
-            td2.innerHTML = parsedData[0].drugName1; 
+            td2.innerHTML = parsedData[i-1].drugName1; 
 
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
-            td3.innerHTML = parsedData[0].drugID2; 
+            td3.innerHTML = parsedData[i-1].drugID2; 
 
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
-            td4.innerHTML = parsedData[0].drugName2; 
+            td4.innerHTML = parsedData[i-1].drugName2; 
 
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
-            td5.innerHTML = parsedData[0].sideEffectDescription; 
+            td5.innerHTML = parsedData[i-1].sideEffectDescription; 
 
             let td6 = updateRowIndex.getElementsByTagName("td")[6];
-            td5.innerHTML = parsedData[0].sideEffectSeverity; 
+            td6.innerHTML = parsedData[i-1].sideEffectSeverity; 
 
             let td7 = updateRowIndex.getElementsByTagName("td")[7];
-            td5.innerHTML = parsedData[0].source; 
+            td7.innerHTML = parsedData[i-1].source; 
        }
     }
 }
