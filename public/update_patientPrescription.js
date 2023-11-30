@@ -58,10 +58,10 @@ updatePersonForm.addEventListener("submit", function (e) {
             updateRow(xhttp.response, patientPrescriptionIDValue);
 
             console.log('Emptying values')
-            inputPatientPrescriptionID = "";
-            inputDosage = "";
-            inputDrugID = "";
-            inputPatientID = "";
+            inputPatientPrescriptionID.value = "";
+            inputDosage.value = "";
+            inputDrugID.value = "";
+            inputPatientID.value = "";
 
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -84,35 +84,30 @@ function updateRow(data, patientPrescriptionID){
     for (let i = 1, row; row = table.rows[i]; i++) {
         console.log(row)
 
-       //iterate through rows
-       //rows would be accessed using the "row" variable assigned in the for loop
-       console.log(`row attribute for ${i}: ${table.rows[i].getAttribute("data-value")}`);
-       console.log(`element value: ${table.rows[i].getElementsByTagName("td")[0].innerHTML}`)
-    //    if (table.rows[i].getAttribute("data-value") == patientPrescriptionID) {
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == patientPrescriptionID) {
-            console.log(`parsedRow: ${parsedData[0].dosage}, ${parsedData[0].drugID}, ${parsedData[0].patientID}, ${parsedData[0].drugName}, ${parsedData[0].name}`);
+            console.log(`parsedRow: ${parsedData[i-1].dosage}, ${parsedData[i-1].drugID}, ${parsedData[i-1].patientID}, ${parsedData[i-1].drugName}, ${parsedData[i-1].name}`);
             // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Adjust dosage
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            td1.innerHTML = parsedData[0].dosage; 
+            td1.innerHTML = parsedData[i-1].dosage; 
 
             // Adjust dosage
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
-            td2.innerHTML = parsedData[0].drugID; 
+            td2.innerHTML = parsedData[i-1].drugID; 
 
             // Adjust dosage
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
-            td3.innerHTML = parsedData[0].patientID; 
+            td3.innerHTML = parsedData[i-1].patientID; 
 
             // Adjust dosage
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
-            td4.innerHTML = parsedData[0].drugName; 
+            td4.innerHTML = parsedData[i-1].drugName; 
 
             // Adjust dosage
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
-            td5.innerHTML = parsedData[0].name; 
+            td5.innerHTML = parsedData[i-1].name; 
        }
     }
 }
