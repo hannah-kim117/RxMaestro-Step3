@@ -5,10 +5,12 @@ addPatientButton.addEventListener("click", function (e){
     e.preventDefault();
 
     let inputPatientID = document.getElementById("input-patientID-ADD");
+    let inputPatientName = document.getElementById("input-patientName-ADD");
     let inputPhoneNumber = document.getElementById("input-phoneNumber-ADD");
     
     let data = {
         patientID: inputPatientID.value,
+        patientName: inputPatientName.value,
         phoneNumber: inputPhoneNumber.value
     }
 
@@ -25,6 +27,7 @@ addPatientButton.addEventListener("click", function (e){
 
             // Clear the input fields for another transaction
             inputPatientID.value = '';
+            inputPatientName.value = '';
             inputPhoneNumber.value = '';
         }
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
@@ -51,18 +54,21 @@ addRowToTable = (data) => {
     // Create a row and 4 cells
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
+    let patientNameCell = document.createElement("TD");
     let nameCell = document.createElement("TD");
     let phoneNumberCell = document.createElement("TD");
     
 
     // Fill the cells with correct data
     idCell.innerText = newRow.patientID;
+    patientNameCell.innerText = newRow.patientName;
     nameCell.innerText = newRow.name;
-    phoneNumberCell.innerText = newRow.phoneNumber
+    phoneNumberCell.innerText = newRow.phoneNumber;
 
 
     // Add the cells to the row 
     row.appendChild(idCell);
+    row.appendChild(patientNameCell);
     row.appendChild(nameCell);
     row.appendChild(phoneNumberCell);
     
