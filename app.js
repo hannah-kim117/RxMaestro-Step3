@@ -273,14 +273,6 @@ app.post('/add-drug', function(req, res) {
     })
 });
 
-app.delete('/delete-drug', function(req,res,next) {
-    console.log("Deleting drug");
-});
-
-app.put('/update-drug', function(req,res,next) {
-    console.log("Updating drug");
-});
-
 /*                              Drug Interaction Sources                      */
 
 app.post('/add-drug-interaction-source', function(req, res) { 
@@ -299,6 +291,61 @@ app.put('/update-drug-interaction-source', function(req,res,next) {
 
 app.post('/add-drug-interaction', function(req, res) { 
     console.log("Adding drug-interaction");
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+    console.log(`Add req: ${req.body}`);
+    console.log(`Add res: ${res.body}`);
+
+    // Capture NULL values
+    let source = data.source;
+    if (!source) {
+        source = 'NULL'
+    }
+    let sideEffectDescription = data.sideEffectDescription;
+    if (!sideEffectDescription) {
+        sideEffectDescription = 'NULL'
+    }
+    let sideEffectSeverity = data.sideEffectSeverity;
+    if (!sideEffectSeverity) {
+        sideEffectSeverity = 'NULL'
+    }
+
+    let drugID1 = parseInt(data.drugID1);
+    let drugID2 = parseInt(data.drugID2);
+    console.log(`drugID1, drugID2, source, description, severity: '${drugID1}', '${drugID2}', '${source}, ${sideEffectDescription}, ${sideEffectSeverity}'`);
+    // Create the query and run it on the database
+    query1 = `INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) VALUES ('${drugID1}', '${drugID2}', '${source}', '${sideEffectDescription}', '${sideEffectSeverity}')`;
+
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+        else
+        {
+            // If there was no error, perform a SELECT * on bsg_people
+            query2 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+            db.pool.query(query2, function(error, rows, fields){
+
+                // If there was an error on the second query, send a 400
+                if (error) {
+                    
+                    // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                    console.log(error);
+                    res.sendStatus(400);
+                }
+                // If all went well, send the results of the query back.
+                else
+                {
+                    res.send(rows);
+                }
+            })
+        }
+    })
 });
 
 app.delete('/delete-drug-interaction', function(req,res,next) {
