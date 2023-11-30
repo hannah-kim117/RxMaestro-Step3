@@ -452,19 +452,12 @@ app.post('/add-manufacturer', function(req, res) {
     console.log(`Add req: ${req.body}`);
     console.log(`Add res: ${res.body}`);
 
-    // Capture NULL values
-    let manufacturerID = data.manufacturerID;
-    if (!manufacturerID) {
-        manufacturerID = 'NULL'
-    } else {
-        manufacturerID = parseInt(manufacturerID)
-    }
-
-    let manufacturerName = data.manufacturerName;
+    
+    let name = data.name;
     let phoneNumber = data.phoneNumber;
-    console.log(`manufacturerID, manufacturerName, phoneNumber: '${manufacturerID}', '${manufacturerName}', '${phoneNumber}'`);
+    console.log(`name, phoneNumber: '${name}', '${phoneNumber}'`);
     // Create the query and run it on the database
-    query1 = `INSERT INTO Manufacturers (manufacturerID, manufacturerName, phoneNumber) VALUES ('${manufacturerID}', '${manufacturerName}', '${phoneNumber}')`;
+    query1 = `INSERT INTO Manufacturers (name, phoneNumber) VALUES ('${name}', '${phoneNumber}')`;
 
     db.pool.query(query1, function(error, rows, fields){
 
@@ -478,7 +471,7 @@ app.post('/add-manufacturer', function(req, res) {
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT manufacturerID, manufacturerName, phoneNumber FROM Manufacturers";
+            query2 = "SELECT manufacturerID, name, phoneNumber FROM Manufacturers";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -509,12 +502,12 @@ app.post('/add-patient', function(req, res) {
     console.log(`Add res: ${res.body}`);
 
     
-    let patientID = parseInt(data.patientID);
-    let patientName = data.patientName;
+    let name = data.name;
     let phoneNumber = data.phoneNumber;
-    console.log(`patientID, patientName, phoneNumber: '${patientID}', '${patientName}', '${phoneNumber}'`);
+    console.log(`name, phoneNumber: '${name}', '${phoneNumber}'`);
+    
     // Create the query and run it on the database
-    query1 = `INSERT INTO Patients (patientID, patientName, phoneNumber) VALUES ('${patientID}', '${patientName}', '${phoneNumber}')`;
+    query1 = `INSERT INTO Patients (name, phoneNumber) VALUES ('${name}', '${phoneNumber}')`;
 
     db.pool.query(query1, function(error, rows, fields){
 
@@ -525,10 +518,11 @@ app.post('/add-patient', function(req, res) {
             console.log(error)
             res.sendStatus(400);
         }
+        
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT patientID, patientName, phoneNumber FROM Patients";
+            query2 = "SELECT patientID, name, phoneNumber FROM Patients";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
