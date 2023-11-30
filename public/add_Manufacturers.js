@@ -4,13 +4,13 @@ addManufacturerButton.addEventListener("click", function (e){
 
     e.preventDefault();
 
-    let inputManufacturerID = document.getElementById("input-manufacturerID-ADD");
+    
     let inputManufacturerName = document.getElementById("input-manufacturerName-ADD");
     let inputPhoneNumber = document.getElementById("input-phoneNumber-ADD");
     
     let data = {
-        manufacturerID: inputManufacturerID.value,
-        manufacturerName: inputManufacturerName.value,
+        
+        name: inputManufacturerName.value,
         phoneNumber: inputPhoneNumber.value
     }
 
@@ -26,7 +26,7 @@ addManufacturerButton.addEventListener("click", function (e){
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputManufacturerID.value = '';
+            
             inputManufacturerName.value = '';
             inputPhoneNumber.value = '';
         }
@@ -55,21 +55,18 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let manufacturerNameCell = document.createElement("TD");
-    let nameCell = document.createElement("TD");
     let phoneNumberCell = document.createElement("TD");
 
     // Fill the cells with correct data
     idCell.innerText = newRow.manufacturerID;
-    manufacturerNameCell.innerText = newRow.manufacturerName;
-    nameCell.innerText = newRow.name;
-    phoneNumberCell.innerText = newRow.phoneNumber
+    manufacturerNameCell.innerText = newRow.name;
+    phoneNumberCell.innerText = newRow.phoneNumber;
 
     
 
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(manufacturerNameCell);
-    row.appendChild(nameCell);
     row.appendChild(phoneNumberCell);
     
     row.setAttribute('data-value', newRow.manufacturerID);
