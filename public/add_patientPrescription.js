@@ -8,6 +8,10 @@ addPatientButton.addEventListener("click", function (e){
     let inputDrugID = document.getElementById("input-drugID-ADD");
     let inputPatientID = document.getElementById("input-patientID-ADD");
     
+    if (isNaN(parseInt(inputDrugID.value))) { return; }
+    if (isNaN(parseInt(inputPatientID.value))) { return; }
+    if (!inputDosage.value) { return; }
+
     let data = {
         dosage: inputDosage.value,
         drugID: inputDrugID.value,
