@@ -10,6 +10,8 @@ addInteractionButton.addEventListener("click", function (e){
     let inputSideEffectDescription = document.getElementById("input-sideEffectDescription-ADD");
     let inputSideEffectSeverity = document.getElementById("input-sideEffectSeverity-ADD");
 
+    if (isNaN(parseInt(inputDrugID1.value))) { return; }
+    if (isNaN(parseInt(inputDrugID2.value))) { return; }
     
     let data = {
         drugID1: inputDrugID1.value,

@@ -7,6 +7,9 @@ addDrugButton.addEventListener("click", function (e){
     let inputDrugID = document.getElementById("input-drugID-ADD");
     let inputDrugName = document.getElementById("input-drugName-ADD");
     let inputManufacturerID = document.getElementById("input-manufacturerID-ADD");
+
+    if (isNaN(parseInt(inputDrugID.value))) { return; }
+    if (!inputDrugName.value) { return; }
     
     let data = {
         drugID: inputDrugID.value,
