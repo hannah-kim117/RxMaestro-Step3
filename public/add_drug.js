@@ -26,7 +26,7 @@ addDrugButton.addEventListener("click", function (e){
         if (xhttp.readyState == 4 && xhttp.status == 200) {
 
             // Add the new data to the table
-            addRowToTable(xhttp.response);
+            addRowToTable(xhttp.response, parseInt(inputDrugID.value));
 
             // Clear the input fields for another transaction
             inputDrugID.value = '';
@@ -42,7 +42,8 @@ addDrugButton.addEventListener("click", function (e){
 
 });
 
-addRowToTable = (data) => {
+addRowToTable = (data, drugID) => {
+    console.log(data)
 
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("drug-table");
@@ -52,7 +53,18 @@ addRowToTable = (data) => {
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
-    let newRow = parsedData[parsedData.length - 1]
+
+    // Find the target row
+    rowIndex = 0;
+    for (let i = 0; i < parsedData.length; i++) {
+        currentRow = parsedData[i];
+        if (currentRow.drugID == drugID) {
+            rowIndex = i
+            break;
+        }
+    }
+
+    let newRow = parsedData[rowIndex]
 
     // Create a row and 4 cells
     let row = document.createElement("TR");
