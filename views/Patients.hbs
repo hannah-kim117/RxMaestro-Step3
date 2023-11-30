@@ -9,12 +9,8 @@
 <p>To add a new prescription, please enter the information below and click 'Submit'!</p>
 <form id="add-patient-form-ajax">
     <label for="input-patientID-ADD">Patient: </label>
-    <select name="input-patientID-ADD" id="input-patientID-ADD">
-        <option value="">Select a Patient</option>
-        {{#each patients}}
-        <option value="{{this.patientID}}">{{this.name}}</option>
-        {{/each}}
-    </select>     
+    <input type="text" name="input-patientID-ADD" id="input-patientID-ADD" required>
+
     <label for="input-phoneNumber-ADD">Phone Number: </label>
     <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
     <button type="submit" id ="add-button">Submit</button>
