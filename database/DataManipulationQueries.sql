@@ -9,7 +9,7 @@
 ------------------------------------------------------------
 -- CREATE entry
 INSERT INTO Manufacturers (name, phoneNumber)
-VALUES (:nameInput, :phoneNumberInput);
+VALUES ('${manufacturerName}', '${phoneNumber}');
 
 
 -- READ all attributes
@@ -21,11 +21,11 @@ SELECT manufacturerID, name, phoneNumber FROM Manufacturers;
 ------------------------------------------------------------
 ------------------------------------------------------------
 -- CREATE entry
-INSERT INTO Drugs (drugID, drugName, manufacturerID)
-VALUES (:drugIDInput, :drugNameInput, (SELECT manufacturerID FROM Manufacturers WHERE name = :manufacturerNameInput));
+INSERT INTO Drugs (drugID, drugName, manufacturerID) 
+VALUES ('${drugID}', '${drugName}', '${manufacturerID}');
 
 -- get all attributes needed for Drugs Table
-SELECT drugID, drugName, manufacturerID FROM Drugs;
+SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -33,25 +33,21 @@ SELECT drugID, drugName, manufacturerID FROM Drugs;
 ------------------------------------------------------------
 ------------------------------------------------------------
 -- CREATE entry
-INSERT INTO PatientPrescriptions (patientID, drugID, dosage)
-VALUES 
-(
-    (SELECT patientID FROM Patients WHERE name = :nameInput),
-    (SELECT drugID FROM Drugs WHERE drugName = :drugNameInput),
-    :dosageInput
-);
+INSERT INTO PatientPrescriptions (patientID, drugID, dosage) 
+VALUES ('${patientID}', '${drugID}', '${dosage}');
 
 -- UPDATE entry
-UPDATE PatientPrescriptions
-SET patientID = :patientIDInput, drugID = :drugIDInput, dosage = :dosageInput
-WHERE patientPrescriptionID = :idInput;
+UPDATE PatientPrescriptions 
+SET patientID = '${patientID}', drugID = '${drugID}', dosage = '${dosage}' WHERE patientPrescriptionID = '${patientPrescriptionID}';
 
 -- DELETE entry
 DELETE FROM PatientPrescriptions
-WHERE patientPrescriptionID = :idInput;
+WHERE patientPrescriptionID = '${patientPrescriptionID}';
 
 -- READ all attributes
-SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescriptions;
+SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions 
+JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID 
+JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;;
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -59,23 +55,19 @@ SELECT patientPrescriptionID, dosage, drugID, patientID FROM PatientPrescription
 ------------------------------------------------------------
 ------------------------------------------------------------
 -- CREATE entry
-INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity)
-VALUES
-(
-    (SELECT drugID FROM Drugs WHERE drugName = :drugNameInput),
-    (SELECT drugID FROM Drugs WHERE drugName = :drugNameInput),
-    (SELECT sourceName FROM DrugInteractionSources WHERE sourceName = :sourceNameInput),
-    :descriptionInput,
-    :severityInput
-);
+INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) 
+VALUES ('${drugID1}', '${drugID2}', '${source}', '${sideEffectDescription}', '${sideEffectSeverity}');
 
 -- UPDATE entry
-UPDATE DrugInteractions
-SET drugID1 = :drugIDInput, drugID2 = :drugIDInput, source = :sourceNameInput, sideEffectDescription = :descriptionInput, sideEffectSeverity = :severityInput
-WHERE interactionID = :interactionIDInput;
+UPDATE DrugInteractions 
+SET source = '${source}', sideEffectDescription = '${sideEffectDescription}', sideEffectSeverity = '${sideEffectSeverity}' 
+WHERE interactionID = '${interactionID}';
 
 -- READ all attributes
-SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions; 
+SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions 
+JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID 
+JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID 
+ORDER BY interactionID; 
 
 ------------------------------------------------------------
 ------------------------------------------------------------
@@ -84,7 +76,7 @@ SELECT drugID1, drugID2, sideEffectDescription, sideEffectSeverity, source FROM 
 ------------------------------------------------------------
 -- CREATE entry
 INSERT INTO Patients (name, phoneNumber)
-VALUES (:nameInput, :phoneNumberInput);
+VALUES ('${patientName}', '${phoneNumber}');
 
 -- READ all attributes
 SELECT patientID, name, phoneNumber FROM Patients;
@@ -96,7 +88,7 @@ SELECT patientID, name, phoneNumber FROM Patients;
 ------------------------------------------------------------
 -- CREATE entry
 INSERT INTO DrugInteractionSources (sourceName, url)
-VALUES (:sourceNameInput, :urlInput);
+VALUES ('${sourceName}', '${url}');
 
 -- READ all attributes
 SELECT sourceName, url FROM DrugInteractionSources;
