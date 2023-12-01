@@ -4,12 +4,12 @@ addPatientButton.addEventListener("click", function (e){
 
     e.preventDefault();
 
-    let inputPatientID = document.getElementById("input-patientID-ADD");
+   
     let inputPatientName = document.getElementById("input-patientName-ADD");
     let inputPhoneNumber = document.getElementById("input-phoneNumber-ADD");
     
     let data = {
-        patientID: inputPatientID.value,
+        
         name: inputPatientName.value,
         phoneNumber: inputPhoneNumber.value
     }
@@ -26,7 +26,7 @@ addPatientButton.addEventListener("click", function (e){
             addRowToTable(xhttp.response);
 
             // Clear the input fields for another transaction
-            inputPatientID.value = '';
+            
             inputPatientName.value = '';
             inputPhoneNumber.value = '';
         }
