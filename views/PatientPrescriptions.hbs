@@ -11,7 +11,7 @@
     <label for="input-dosage-ADD">Dosage: </label>
     <input type="text" name="input-dosage-ADD" id="input-dosage-ADD" required>
     
-    <label for="input-drugID-ADD">drugID: </label>
+    <label for="input-drugID-ADD">Drug Name: </label>
     <select name="input-drugID-ADD" id="input-drugID-ADD">
         <option value="">Select a Drug</option>
         {{#each drugs}}
@@ -19,7 +19,7 @@
         {{/each}}
     </select>   
 
-    <label for="input-patientID-ADD">patientID: </label>
+    <label for="input-patientID-ADD">Patient Name: </label>
     <select name="input-patientID-ADD" id="input-patientID-ADD">
         <option value="">Select a Patient</option>
         {{#each patients}}
