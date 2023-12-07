@@ -48,7 +48,7 @@ app.get('/drug-interaction-sources', function(req, res){
 });
 
 app.get('/drugs', function(req, res){
-    let query1 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
+    let query1 = "SELECT drugID AS RXCUI, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
     let query2 = "SELECT * FROM Manufacturers";
 
     db.pool.query(query1, (error, rows, fields) => {
