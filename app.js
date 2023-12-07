@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9617;
+PORT = 9842;
 
 var db = require('./database/db-connector');
 
@@ -22,7 +22,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/drug-interactions', function(req, res){
-    let query1 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+    let query1 = "SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
     let query2 = "SELECT drugName, drugID FROM Drugs";
     let query3 = "SELECT sourceName FROM DrugInteractionSources";
 
