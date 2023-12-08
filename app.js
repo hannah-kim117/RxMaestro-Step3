@@ -107,8 +107,6 @@ app.post('/add-patient-prescription', function(req, res)
     console.log("Entered Patient Prescriptions ADD");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
 
     // Capture NULL values
     let dosage = data.dosage;
@@ -119,7 +117,6 @@ app.post('/add-patient-prescription', function(req, res)
 
     let drugID = parseInt(data.drugID);
     let patientID = parseInt(data.patientID);
-    console.log(`patientID, drugID, dosage: '${drugID}', '${patientID}', '${dosage}'`);
     // Create the query and run it on the database
     query1 = `INSERT INTO PatientPrescriptions (patientID, drugID, dosage) VALUES ('${patientID}', '${drugID}', '${dosage}')`;
 
@@ -173,8 +170,6 @@ app.delete('/delete-patient-prescription', function(req,res,next){
 
 app.put('/update-patient-prescription', function(req,res,next){
     console.log("Updating prescription");
-    console.log(`Update req: ${req.body}`);
-    console.log(`Update res: ${res.body}`);
     let data = req.body;
   
     // Capture NULL values
@@ -224,8 +219,6 @@ app.post('/add-drug', function(req, res) {
     console.log("Adding drug");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
 
     // Capture NULL values
     let manufacturerID = data.manufacturerID;
@@ -237,7 +230,6 @@ app.post('/add-drug', function(req, res) {
 
     let drugID = parseInt(data.drugID);
     let drugName = data.drugName;
-    console.log(`drugID, manufacturerID, drugName: '${drugID}', '${manufacturerID}', '${drugName}'`);
     // Create the query and run it on the database
     query1 = `INSERT INTO Drugs (drugID, drugName, manufacturerID) VALUES ('${drugID}', '${drugName}', '${manufacturerID}')`;
 
@@ -279,14 +271,9 @@ app.post('/add-drug-interaction-source', function(req, res) {
     console.log("Adding drug interaction source");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
-
-    
 
     let sourceName = data.sourceName;
     let url = data.url;
-    console.log(`sourceName, url: '${sourceName}', '${url}'`);
     // Create the query and run it on the database
     query1 = `INSERT INTO DrugInteractionSources (sourceName, url) VALUES ('${sourceName}', '${url}')`;
 
@@ -330,8 +317,6 @@ app.post('/add-drug-interaction', function(req, res) {
     console.log("Adding drug-interaction");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
 
     // Capture NULL values
     let source = data.source;
@@ -349,7 +334,7 @@ app.post('/add-drug-interaction', function(req, res) {
 
     let drugID1 = parseInt(data.drugID1);
     let drugID2 = parseInt(data.drugID2);
-    console.log(`drugID1, drugID2, source, description, severity: '${drugID1}', '${drugID2}', '${source}, ${sideEffectDescription}, ${sideEffectSeverity}'`);
+
     // Create the query and run it on the database
     query1 = `INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) VALUES ('${drugID1}', '${drugID2}', '${source}', '${sideEffectDescription}', '${sideEffectSeverity}')`;
 
@@ -365,7 +350,7 @@ app.post('/add-drug-interaction', function(req, res) {
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+            query2 = "SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -389,8 +374,6 @@ app.put('/update-drug-interaction', function(req,res,next) {
     console.log("Updating drug-interaction");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
 
     // Capture NULL values
     let source = data.source;
@@ -407,7 +390,6 @@ app.put('/update-drug-interaction', function(req,res,next) {
     }
 
     let interactionID = parseInt(data.interactionID);
-    console.log(`interactionID, source, description, severity: '${interactionID}', '${source}, ${sideEffectDescription}, ${sideEffectSeverity}'`);
     // Create the query and run it on the database
     query1 = `UPDATE DrugInteractions SET source = '${source}', sideEffectDescription = '${sideEffectDescription}', sideEffectSeverity = '${sideEffectSeverity}' WHERE interactionID = '${interactionID}'`;
 
@@ -423,7 +405,7 @@ app.put('/update-drug-interaction', function(req,res,next) {
         else
         {
             // If there was no error, perform a SELECT * on bsg_people
-            query2 = "SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
+            query2 = "SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
             db.pool.query(query2, function(error, rows, fields){
 
                 // If there was an error on the second query, send a 400
@@ -449,13 +431,9 @@ app.post('/add-manufacturer', function(req, res) {
     console.log("Adding manufacturer");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
-
     
     let name = data.name;
     let phoneNumber = data.phoneNumber;
-    console.log(`name, phoneNumber: '${name}', '${phoneNumber}'`);
     // Create the query and run it on the database
     query1 = `INSERT INTO Manufacturers (name, phoneNumber) VALUES ('${name}', '${phoneNumber}')`;
 
@@ -498,13 +476,9 @@ app.post('/add-patient', function(req, res) {
     console.log("Adding patient");
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-    console.log(`Add req: ${req.body}`);
-    console.log(`Add res: ${res.body}`);
 
-    
     let name = data.name;
     let phoneNumber = data.phoneNumber;
-    console.log(`name, phoneNumber: '${name}', '${phoneNumber}'`);
     
     // Create the query and run it on the database
     query1 = `INSERT INTO Patients (name, phoneNumber) VALUES ('${name}', '${phoneNumber}')`;
@@ -518,7 +492,6 @@ app.post('/add-patient', function(req, res) {
             console.log(error)
             res.sendStatus(400);
         }
-        
         else
         {
             // If there was no error, perform a SELECT * on bsg_people

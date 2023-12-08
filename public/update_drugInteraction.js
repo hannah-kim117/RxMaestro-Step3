@@ -76,13 +76,13 @@ function updateRow(data, interactionID){
 
             // Adjust columns
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
-            td1.innerHTML = parsedData[i-1].drugID1; 
+            td1.innerHTML = parsedData[i-1].RXCUI_1; 
 
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
             td2.innerHTML = parsedData[i-1].drugName1; 
 
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
-            td3.innerHTML = parsedData[i-1].drugID2; 
+            td3.innerHTML = parsedData[i-1].RXCUI_2; 
 
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
             td4.innerHTML = parsedData[i-1].drugName2; 
