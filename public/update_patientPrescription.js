@@ -19,9 +19,6 @@ updatePersonForm.addEventListener("submit", function (e) {
     let dosageValue = inputDosage.value;
     let drugIDValue = inputDrugID.value;
     let patientIDValue = inputPatientID.value;
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for dosage
 
     if (isNaN(patientPrescriptionIDValue)) 
     {
@@ -35,7 +32,6 @@ updatePersonForm.addEventListener("submit", function (e) {
     {
         return;
     }
-
 
     // Put our data we want to send in a javascript object
     let data = {
@@ -86,26 +82,21 @@ function updateRow(data, patientPrescriptionID){
 
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == patientPrescriptionID) {
             console.log(`parsedRow: ${parsedData[i-1].dosage}, ${parsedData[i-1].drugID}, ${parsedData[i-1].patientID}, ${parsedData[i-1].drugName}, ${parsedData[i-1].name}`);
-            // Get the location of the row where we found the matching person ID
+
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
-            // Adjust dosage
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
             td1.innerHTML = parsedData[i-1].dosage; 
 
-            // Adjust dosage
             let td2 = updateRowIndex.getElementsByTagName("td")[2];
             td2.innerHTML = parsedData[i-1].drugID; 
 
-            // Adjust dosage
             let td3 = updateRowIndex.getElementsByTagName("td")[3];
             td3.innerHTML = parsedData[i-1].patientID; 
 
-            // Adjust dosage
             let td4 = updateRowIndex.getElementsByTagName("td")[4];
             td4.innerHTML = parsedData[i-1].drugName; 
 
-            // Adjust dosage
             let td5 = updateRowIndex.getElementsByTagName("td")[5];
             td5.innerHTML = parsedData[i-1].name; 
        }

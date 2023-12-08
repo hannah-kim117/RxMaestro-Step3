@@ -11,9 +11,6 @@ updateInteractionButton.addEventListener("click", function (e){
     let inputSource = document.getElementById("input-sourceName-UPDATE");
     let inputSideEffectDescription = document.getElementById("input-sideEffectDescription-UPDATE");
     let inputSideEffectSeverity = document.getElementById("input-sideEffectSeverity-UPDATE");
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for dosage
 
     if (isNaN(inputInteractionID.value)) 
     {
@@ -67,7 +64,6 @@ function updateRow(data, interactionID){
 
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == interactionID) {
 
-            // Get the location of the row where we found the matching person ID
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Adjust columns
