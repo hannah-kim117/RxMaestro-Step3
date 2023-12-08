@@ -11,9 +11,6 @@ updateInteractionButton.addEventListener("click", function (e){
     let inputSource = document.getElementById("input-sourceName-UPDATE");
     let inputSideEffectDescription = document.getElementById("input-sideEffectDescription-UPDATE");
     let inputSideEffectSeverity = document.getElementById("input-sideEffectSeverity-UPDATE");
-    
-    // currently the database table for bsg_people does not allow updating values to NULL
-    // so we must abort if being bassed NULL for dosage
 
     if (isNaN(inputInteractionID.value)) 
     {
@@ -58,20 +55,15 @@ updateInteractionButton.addEventListener("click", function (e){
 });
 
 function updateRow(data, interactionID){
-    console.log(`Updating row ID=${interactionID} ${typeof interactionID}`);
-    
     let parsedData = JSON.parse(data);
     
     let table = document.getElementById("drug-interaction-table");
-    console.log('Found table');
-    console.log(`type of item looking for: ${typeof table.rows[1].getElementsByTagName("td")[0].innerHTML}`);
     
     for (let i = 1, row; row = table.rows[i]; i++) {
         console.log(row)
 
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == interactionID) {
-            console.log(`parsedRow: ${parsedData[i-1].interactionID}, ${parsedData[i-1].drugID1}, ${parsedData[i-1].drugName1}, ${parsedData[i-1].drugID2}, ${parsedData[i-1].drugName2}, ${parsedData[i-1].sideEffectDescription}, ${parsedData[i-1].sideEffectSeverity}, ${parsedData[i-1].source}`);
-            // Get the location of the row where we found the matching person ID
+
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
             // Adjust columns
