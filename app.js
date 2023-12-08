@@ -112,7 +112,7 @@ app.post('/add-patient-prescription', function(req, res)
     let dosage = data.dosage;
     if (!dosage)
     {
-        dosage = 'NULL'
+        dosage = null
     }
 
     let drugID = parseInt(data.drugID);
@@ -318,25 +318,19 @@ app.post('/add-drug-interaction', function(req, res) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let source = data.source;
-    if (!source) {
-        source = 'NULL'
-    }
-    let sideEffectDescription = data.sideEffectDescription;
-    if (!sideEffectDescription) {
-        sideEffectDescription = 'NULL'
-    }
-    let sideEffectSeverity = data.sideEffectSeverity;
-    if (!sideEffectSeverity) {
-        sideEffectSeverity = 'NULL'
-    }
+    // Capture NULL values and convert to inserts for database
+    let source = !data.source ? null : `'${data.source}'`;
+    
+    let sideEffectDescription = !data.sideEffectDescription ? null : `'${data.sideEffectDescription}'`;
+    
+    let sideEffectSeverity = !data.sideEffectSeverity ? null : `'${data.sideEffectSeverity}'`;
 
-    let drugID1 = parseInt(data.drugID1);
-    let drugID2 = parseInt(data.drugID2);
+    let drugID1 = `'${parseInt(data.drugID1)}'`;
+    let drugID2 = `'${parseInt(data.drugID2)}'`;
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) VALUES ('${drugID1}', '${drugID2}', '${source}', '${sideEffectDescription}', '${sideEffectSeverity}')`;
+    query1 = `INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) VALUES (${drugID1}, ${drugID2}, ${source}, ${sideEffectDescription}, ${sideEffectSeverity})`;
+    console.log(`query1: ${query1}`)
 
     db.pool.query(query1, function(error, rows, fields){
 
@@ -375,23 +369,16 @@ app.put('/update-drug-interaction', function(req,res,next) {
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values
-    let source = data.source;
-    if (!source) {
-        source = 'NULL'
-    }
-    let sideEffectDescription = data.sideEffectDescription;
-    if (!sideEffectDescription) {
-        sideEffectDescription = 'NULL'
-    }
-    let sideEffectSeverity = data.sideEffectSeverity;
-    if (!sideEffectSeverity) {
-        sideEffectSeverity = 'NULL'
-    }
+    // Capture NULL values and convert to inserts for database
+    let source = !data.source ? null : `'${data.source}'`;
 
-    let interactionID = parseInt(data.interactionID);
+    let sideEffectDescription = !data.sideEffectDescription ? null : `'${data.sideEffectDescription}'`;
+    
+    let sideEffectSeverity = !data.sideEffectSeverity ? null : `'${data.sideEffectSeverity}'`;
+
+    let interactionID = `'${parseInt(data.interactionID)}'`;
     // Create the query and run it on the database
-    query1 = `UPDATE DrugInteractions SET source = '${source}', sideEffectDescription = '${sideEffectDescription}', sideEffectSeverity = '${sideEffectSeverity}' WHERE interactionID = '${interactionID}'`;
+    query1 = `UPDATE DrugInteractions SET source = ${source}, sideEffectDescription = ${sideEffectDescription}, sideEffectSeverity = ${sideEffectSeverity} WHERE interactionID = ${interactionID}`;
 
     db.pool.query(query1, function(error, rows, fields){
 

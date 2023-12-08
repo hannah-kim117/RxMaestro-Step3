@@ -73,9 +73,9 @@ addRowToTable = (data) => {
 
     // Fill the cells with correct data
     idCell.innerText = newRow.interactionID;
-    drugID1Cell.innerText = newRow.drugID1;
+    drugID1Cell.innerText = newRow.RXCUI_1;
     drugName1Cell.innerText = newRow.drugName1;
-    drugID2Cell.innerText = newRow.drugID2;
+    drugID2Cell.innerText = newRow.RXCUI_2;
     drugName2Cell.innerText = newRow.drugName2;
     sideEffectDescriptionCell.innerText = newRow.sideEffectDescription;
     sideEffectSeverityCell.innerText = newRow.sideEffectSeverity;
