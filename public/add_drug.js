@@ -77,7 +77,7 @@ addRowToTable = (data, drugID) => {
     idCell.innerText = newRow.drugID;
     drugNameCell.innerText = newRow.drugName;
     manufacturerIDCell.innerText = newRow.manufacturerID;
-    nameCell.innerText = newRow.name;
+    nameCell.innerText = newRow.manufacturerName;
 
 
     // Add the cells to the row 
