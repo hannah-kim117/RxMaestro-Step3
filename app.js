@@ -112,7 +112,7 @@ app.post('/add-patient-prescription', function(req, res)
     let dosage = data.dosage;
     if (!dosage)
     {
-        dosage = NULL
+        dosage = null
     }
 
     let drugID = parseInt(data.drugID);
