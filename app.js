@@ -16,7 +16,6 @@ app.use(express.static(__dirname + '/public'));
 
 
 // Routes
-
 app.get('/', function(req, res){
     res.render('index');
 });
@@ -131,7 +130,6 @@ app.post('/add-patient-prescription', function(req, res)
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -142,7 +140,6 @@ app.post('/add-patient-prescription', function(req, res)
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -186,7 +183,6 @@ app.put('/update-patient-prescription', function(req,res,next){
     let queryUpdatePrescription = `UPDATE PatientPrescriptions SET patientID = '${patientID}', drugID = '${drugID}', dosage = '${dosage}' WHERE patientPrescriptionID = '${patientPrescriptionID}'`;
     let query2 = "SELECT patientPrescriptionID, dosage, PatientPrescriptions.drugID, PatientPrescriptions.patientID, drugName, name FROM PatientPrescriptions JOIN Drugs ON PatientPrescriptions.drugID = Drugs.drugID JOIN Patients ON PatientPrescriptions.patientID = Patients.patientID;";
   
-    // Run the 1st query
     db.pool.query(queryUpdatePrescription, function(error, rows, fields){
         if (error) {
 
@@ -194,12 +190,8 @@ app.put('/update-patient-prescription', function(req,res,next){
         console.log(error);
         res.sendStatus(400);
         }
-
-        // If there was no error, we run our second query and return that data so we can use it to update the people's
-        // table on the front-end
         else
         {
-            // Run the second query
             db.pool.query(query2, function(error, rows, fields) {
 
                 if (error) {
@@ -230,12 +222,11 @@ app.post('/add-drug', function(req, res) {
 
     let drugID = parseInt(data.drugID);
     let drugName = data.drugName;
-    // Create the query and run it on the database
+
     query1 = `INSERT INTO Drugs (drugID, drugName, manufacturerID) VALUES ('${drugID}', '${drugName}', '${manufacturerID}')`;
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -244,7 +235,6 @@ app.post('/add-drug', function(req, res) {
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT drugID, drugName, Drugs.manufacturerID, Manufacturers.name AS manufacturerName FROM Drugs JOIN Manufacturers ON Drugs.manufacturerID = Manufacturers.manufacturerID";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -255,7 +245,6 @@ app.post('/add-drug', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -279,7 +268,6 @@ app.post('/add-drug-interaction-source', function(req, res) {
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -288,7 +276,6 @@ app.post('/add-drug-interaction-source', function(req, res) {
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT sourceName, url FROM DrugInteractionSources";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -299,7 +286,6 @@ app.post('/add-drug-interaction-source', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -328,13 +314,11 @@ app.post('/add-drug-interaction', function(req, res) {
     let drugID1 = `'${parseInt(data.drugID1)}'`;
     let drugID2 = `'${parseInt(data.drugID2)}'`;
 
-    // Create the query and run it on the database
     query1 = `INSERT INTO DrugInteractions (drugID1, drugID2, source, sideEffectDescription, sideEffectSeverity) VALUES (${drugID1}, ${drugID2}, ${source}, ${sideEffectDescription}, ${sideEffectSeverity})`;
     console.log(`query1: ${query1}`)
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -343,7 +327,6 @@ app.post('/add-drug-interaction', function(req, res) {
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -354,7 +337,6 @@ app.post('/add-drug-interaction', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -377,12 +359,11 @@ app.put('/update-drug-interaction', function(req,res,next) {
     let sideEffectSeverity = !data.sideEffectSeverity ? null : `'${data.sideEffectSeverity}'`;
 
     let interactionID = `'${parseInt(data.interactionID)}'`;
-    // Create the query and run it on the database
+
     query1 = `UPDATE DrugInteractions SET source = ${source}, sideEffectDescription = ${sideEffectDescription}, sideEffectSeverity = ${sideEffectSeverity} WHERE interactionID = ${interactionID}`;
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
@@ -391,7 +372,6 @@ app.put('/update-drug-interaction', function(req,res,next) {
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID ORDER BY interactionID";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -402,7 +382,6 @@ app.put('/update-drug-interaction', function(req,res,next) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -426,16 +405,13 @@ app.post('/add-manufacturer', function(req, res) {
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT manufacturerID, name, phoneNumber FROM Manufacturers";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -446,7 +422,6 @@ app.post('/add-manufacturer', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);
@@ -472,16 +447,13 @@ app.post('/add-patient', function(req, res) {
 
     db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
         if (error) {
-
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
             res.sendStatus(400);
         }
         else
         {
-            // If there was no error, perform a SELECT * on bsg_people
             query2 = "SELECT patientID, name, phoneNumber FROM Patients";
             db.pool.query(query2, function(error, rows, fields){
 
@@ -492,7 +464,6 @@ app.post('/add-patient', function(req, res) {
                     console.log(error);
                     res.sendStatus(400);
                 }
-                // If all went well, send the results of the query back.
                 else
                 {
                     res.send(rows);

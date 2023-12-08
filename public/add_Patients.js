@@ -51,23 +51,17 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row
     let row = document.createElement("TR");
     let idCell = document.createElement("TD");
     let patientNameCell = document.createElement("TD");
     let phoneNumberCell = document.createElement("TD");
-
-
-    
 
     // Fill the cells with correct data
     idCell.innerText = newRow.patientID;
     patientNameCell.innerText = newRow.name;
     phoneNumberCell.innerText = newRow.phoneNumber;
     
-
-
-
     // Add the cells to the row 
     row.appendChild(idCell);
     row.appendChild(patientNameCell);

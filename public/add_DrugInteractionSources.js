@@ -48,7 +48,7 @@ addRowToTable = (data) => {
     let parsedData = JSON.parse(data);
     let newRow = parsedData[parsedData.length - 1]
 
-    // Create a row and 4 cells
+    // Create a row
     let row = document.createElement("TR");
     let sourceName = document.createElement("TD");
     let url = document.createElement("TD");
@@ -57,8 +57,6 @@ addRowToTable = (data) => {
     sourceName.innerText = newRow.sourceName;
     url.innerText = newRow.url;
     
-
-
     // Add the cells to the row 
     row.appendChild(sourceName);
     row.appendChild(url);
