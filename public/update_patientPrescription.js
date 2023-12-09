@@ -1,25 +1,30 @@
+// Citation for this file:
+// Date: 11/13/2023
+// Based on Node.js starter code for this course
+// Functions modified from the starter code for our project
+// Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
-// Get the objects we need to modify
+// Add event listener to update form
 let updatePersonForm = document.getElementById('update-patientPrescription-form-ajax');
 
-// Modify the objects we need
 updatePersonForm.addEventListener("submit", function (e) {
    
-    // Prevent the form from submitting
+    // Prevent default submit action
     e.preventDefault();
 
-    // Get form fields we need to get data from
+    // Get data from the form
     let inputPatientPrescriptionID = document.getElementById("input-patientPrescriptionID-UPDATE");
     let inputDosage = document.getElementById("input-dosage-UPDATE");
     let inputDrugID = document.getElementById("input-drugID-UPDATE");
     let inputPatientID = document.getElementById("input-patientID-UPDATE");
 
-    // Get the values from the form fields
+    // Extract values from each of the row elements
     let patientPrescriptionIDValue = inputPatientPrescriptionID.value;
     let dosageValue = inputDosage.value;
     let drugIDValue = inputDrugID.value;
     let patientIDValue = inputPatientID.value;
 
+    // Check if critical values are empty and end update if so
     if (isNaN(patientPrescriptionIDValue)) 
     {
         return;
@@ -33,7 +38,7 @@ updatePersonForm.addEventListener("submit", function (e) {
         return;
     }
 
-    // Put our data we want to send in a javascript object
+    // Create data object to pass to backend
     let data = {
         patientPrescriptionID: patientPrescriptionIDValue,
         dosage: dosageValue,
@@ -53,13 +58,14 @@ updatePersonForm.addEventListener("submit", function (e) {
             // Add the new data to the table
             updateRow(xhttp.response, patientPrescriptionIDValue);
 
-            console.log('Emptying values')
+            // Reset values in the form
             inputPatientPrescriptionID.value = "";
             inputDosage.value = "";
             inputDrugID.value = "";
             inputPatientID.value = "";
 
         }
+        // Backend sent back an error -> print error to console
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
@@ -70,21 +76,22 @@ updatePersonForm.addEventListener("submit", function (e) {
 
 });
 
+// Function that take the data that was passed back from the backend along with the PK for the target row and replaces the old values for that row with the new values
 function updateRow(data, patientPrescriptionID){
-    console.log(`Updating row ID=${patientPrescriptionID}`);
+
+    // Parse data from backend and store in parsedData
     let parsedData = JSON.parse(data);
     
+    // Find table and loop through rows until the target row is found
     let table = document.getElementById("prescription-table");
-    console.log('Found table');
-    
     for (let i = 1, row; row = table.rows[i]; i++) {
-        console.log(row)
 
+        // If the PK value matches the target PK value -> update row with parsed values
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == patientPrescriptionID) {
-            console.log(`parsedRow: ${parsedData[i-1].dosage}, ${parsedData[i-1].drugID}, ${parsedData[i-1].patientID}, ${parsedData[i-1].drugName}, ${parsedData[i-1].name}`);
 
             let updateRowIndex = table.getElementsByTagName("tr")[i];
 
+            // Adjust columns
             let td1 = updateRowIndex.getElementsByTagName("td")[1];
             td1.innerHTML = parsedData[i-1].dosage; 
 

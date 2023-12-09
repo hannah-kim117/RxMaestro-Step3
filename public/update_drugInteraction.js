@@ -1,23 +1,30 @@
+// Citation for this file:
+// Date: 11/13/2023
+// Based on Node.js starter code for this course
+// Functions modified from the starter code for our project
+// Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app
 
+// Add event listener to UPDATE-button
 let updateInteractionButton = document.getElementById('UPDATE-button');
 
 updateInteractionButton.addEventListener("click", function (e){
    
-    // Prevent the form from submitting
+    // Prevents default button action
     e.preventDefault();
 
-    // Get form fields we need to get data from
+    // Extract data from form
     let inputInteractionID = document.getElementById("input-interactionID-UPDATE");
     let inputSource = document.getElementById("input-sourceName-UPDATE");
     let inputSideEffectDescription = document.getElementById("input-sideEffectDescription-UPDATE");
     let inputSideEffectSeverity = document.getElementById("input-sideEffectSeverity-UPDATE");
 
+    // Ends update operation if essential values are empty
     if (isNaN(inputInteractionID.value)) 
     {
         return;
     }
 
-    // Put our data we want to send in a javascript object
+    // Create data objecct to pass to backend route
     let data = {
         interactionID: inputInteractionID.value,
         source: inputSource.value,
@@ -25,7 +32,7 @@ updateInteractionButton.addEventListener("click", function (e){
         sideEffectSeverity: inputSideEffectSeverity.value
     }
     
-    // Setup our AJAX request
+    // Define request for backend route
     var xhttp = new XMLHttpRequest();
     xhttp.open("PUT", "/update-drug-interaction", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -37,31 +44,33 @@ updateInteractionButton.addEventListener("click", function (e){
             // Add the new data to the table
             updateRow(xhttp.response, inputInteractionID.value);
 
-            console.log('Emptying values')
+            // Clear the input fields for another transaction
             inputInteractionID.value = "";
             inputSource.value = "";
             inputSideEffectDescription.value = "";
             inputSideEffectSeverity.value = "";
 
         }
+        // The backend sent back an error -> log it to the console
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
     }
-
-    // Send the request and wait for the response
+    // Send request to backend with the data
     xhttp.send(JSON.stringify(data));
-
 });
 
+// Function that take the data that was passed back from the backend along with the PK for the target row and replaces the old values for that row with the new values
 function updateRow(data, interactionID){
+
+    // Parse data from backend and store in parsedData
     let parsedData = JSON.parse(data);
     
+    // Find table and loop through rows until the target row is found
     let table = document.getElementById("drug-interaction-table");
-    
     for (let i = 1, row; row = table.rows[i]; i++) {
-        console.log(row)
-
+        
+        // If the PK value matches the target PK value -> update row with parsed values
         if (table.rows[i].getElementsByTagName("td")[0].innerHTML == interactionID) {
 
             let updateRowIndex = table.getElementsByTagName("tr")[i];

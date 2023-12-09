@@ -1,18 +1,29 @@
+// Citation for this file:
+// Date: 11/13/2023
+// Based on Node.js starter code for this course
+// Functions modified from the starter code for our project
+// Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app
+
+// Add event listener to add-button
 let addInteractionButton = document.getElementById('add-button');
 
 addInteractionButton.addEventListener("click", function (e){
 
+    // Prevents default button action
     e.preventDefault();
 
+    // Extract data from form
     let inputDrugID1 = document.getElementById("input-drugID1-ADD");
     let inputDrugID2 = document.getElementById("input-drugID2-ADD");
     let inputSource = document.getElementById("input-sourceName-ADD");
     let inputSideEffectDescription = document.getElementById("input-sideEffectDescription-ADD");
     let inputSideEffectSeverity = document.getElementById("input-sideEffectSeverity-ADD");
 
+    // Stops add action if some values were not filled out
     if (isNaN(parseInt(inputDrugID1.value))) { return; }
     if (isNaN(parseInt(inputDrugID2.value))) { return; }
     
+    // Create data object to pass to backend route
     let data = {
         drugID1: inputDrugID1.value,
         drugID2: inputDrugID2.value,
@@ -21,6 +32,7 @@ addInteractionButton.addEventListener("click", function (e){
         sideEffectSeverity: inputSideEffectSeverity.value
     }
 
+    // Define request for backend route
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "/add-drug-interaction", true);
     xhttp.setRequestHeader("Content-type", "application/json");
@@ -39,22 +51,21 @@ addInteractionButton.addEventListener("click", function (e){
             inputSideEffectDescription.value = '';
             inputSideEffectSeverity.value = '';
         }
+        // The backend sent back an error -> log it to the console
         else if (xhttp.readyState == 4 && xhttp.status != 200) {
             console.log("There was an error with the input.")
         }
     }
-
+    // Send request to backend with data
     xhttp.send(JSON.stringify(data));
 
 });
 
+// Function that takes the data passed back by the backend route and appends the new data to the bottom of the table
 addRowToTable = (data) => {
 
     // Get a reference to the current table on the page and clear it out.
     let currentTable = document.getElementById("drug-interaction-table");
-
-    // Get the location where we should insert the new row (end of table)
-    let newRowIndex = currentTable.rows.length;
 
     // Get a reference to the new row from the database query (last object)
     let parsedData = JSON.parse(data);
@@ -91,6 +102,7 @@ addRowToTable = (data) => {
     row.appendChild(sideEffectSeverityCell);
     row.appendChild(sourceCell);
     
+    // Create attribute for row that can be looked up for DELETE or UPDATE operations
     row.setAttribute('data-value', newRow.interactionID);
 
     // Add the row to the table

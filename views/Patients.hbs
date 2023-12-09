@@ -1,3 +1,10 @@
+{{!-- 
+Citation for this file:
+Date: 11/13/2023
+Based on Node.js starter code for this course
+The individual elements and tables have been customized and modified for our project.
+Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app --}}
+
 <!-- Patients.hbs -->
 
  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
@@ -20,18 +27,10 @@
 {{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
 <script src="./add_Patients.js" type="application/javascript"></script>
 
-
-
-{{!-- Create a table --}}
 <table border="1" cellpadding="5" id="patient-table">
-
-    {{!-- Header section --}}
     <thead>
-
-        {{!-- For just the first row, we print each key of the row object as a header cell so we
-        know what each column means when the page renders --}}
         <tr>
-            {{#each data.[0]}}              <!-- helpers allow you to iterate thru objects and arrays and perform other specialized tasks -->
+            {{#each data.[0]}}              
             <th>
                 {{@key}}        <!-- key name for the current iteration step -->
             </th>
@@ -40,16 +39,12 @@
         </tr>
     </thead>
 
-    {{!-- Body section --}}
     <tbody>
-
-        {{!-- For each row, print the id, dosage, drugid, patientid, in order --}}
         {{#each data}}
         <tr>
             <td>{{this.patientID}}</td>
             <td>{{this.name}}</td>
             <td>{{this.phoneNumber}}</td>
-            
         </tr>
         {{/each}}
     </tbody>
