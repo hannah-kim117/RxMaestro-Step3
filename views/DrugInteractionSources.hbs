@@ -37,6 +37,7 @@
             </th>
             {{/each}}
             
+            <th>Delete</th>
         </tr>
     </thead>
 
@@ -49,9 +50,9 @@
             <td>{{this.sourceName}}</td>
             <td>{{this.url}}</td>
             
-            
+            <td><button onclick="deleteDrugInteractionSource('{{this.sourceName}}')">Delete</button></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
-
+<script src="./delete_drugInteractionSource.js" type="application/javascript"></script>

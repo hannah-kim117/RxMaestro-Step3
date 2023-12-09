@@ -52,14 +52,22 @@ addRowToTable = (data) => {
     let row = document.createElement("TR");
     let sourceName = document.createElement("TD");
     let url = document.createElement("TD");
+    let deleteCell = document.createElement("TD");
     
     // Fill the cells with correct data
     sourceName.innerText = newRow.sourceName;
     url.innerText = newRow.url;
+
+    deleteCell = document.createElement("button");
+    deleteCell.innerHTML = "Delete";
+    deleteCell.onclick = function(){
+        deleteDrugInteractionSource(newRow.sourceName)
+    }
     
     // Add the cells to the row 
     row.appendChild(sourceName);
     row.appendChild(url);
+    row.appendChild(deleteCell);
     
     
     row.setAttribute('data-value', newRow.sourceName);
