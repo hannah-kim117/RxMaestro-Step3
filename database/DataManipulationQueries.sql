@@ -64,7 +64,7 @@ SET source = '${source}', sideEffectDescription = '${sideEffectDescription}', si
 WHERE interactionID = '${interactionID}';
 
 -- READ all attributes
-SELECT interactionID, drugID1, Drugs1.drugName AS drugName1, drugID2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions 
+SELECT interactionID, drugID1 AS RXCUI_1, Drugs1.drugName AS drugName1, drugID2 AS RXCUI_2, Drugs2.drugName AS drugName2, sideEffectDescription, sideEffectSeverity, source FROM DrugInteractions 
 JOIN Drugs AS Drugs1 ON DrugInteractions.drugID1 = Drugs1.drugID 
 JOIN Drugs AS Drugs2 ON DrugInteractions.drugID2 = Drugs2.drugID 
 ORDER BY interactionID; 
