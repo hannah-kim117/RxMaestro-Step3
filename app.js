@@ -1,7 +1,7 @@
 // Setup
 var express = require('express');
 var app = express();
-PORT = 9842;
+PORT = 9895;
 
 var db = require('./database/db-connector');
 
@@ -295,6 +295,21 @@ app.post('/add-drug-interaction-source', function(req, res) {
     })
 });
 
+app.delete('/delete-drug-interaction-source', function(req,res,next){
+    let data = req.body;
+    let sourceName = data.name;
+    let deleteDrugInteractionSource = `DELETE FROM DrugInteractionSources
+    WHERE sourceName = '${sourceName}'`;
+    
+    db.pool.query(deleteDrugInteractionSource, function(error, rows, fields){
+        if (error) {
+            console.log(error);
+            res.sendStatus(400);
+        } else {
+            res.sendStatus(204);
+        }
+    });
+});
 
 
 /*                              Drug Interactions                             */
