@@ -11,28 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Manufacturers</h1>
 
-{{!-- Form to add a record to the table  --}}
-
-<h2>Add a Manufacturer</h2>
-<p>To add a new manufacturer, please enter the information below and click 'Submit'!</p>
-<form id="add-manufacturer-form-ajax">
-    
-    <label for="input-manufacturerName-ADD">Manufacturer Name: </label>
-    <input type="text" name="input-manufacturerName-ADD" id="input-manufacturerName-ADD" required>
-
-
-    <label for="input-phoneNumber-ADD">Phone Number: </label>
-        <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
- 
-
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_Manufacturers.js" type="application/javascript"></script>
-
-
-
 {{!-- Create a table --}}
 <table border="1" cellpadding="5" id="manufacturer-table">
 
@@ -59,4 +37,22 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
     </tbody>
 </table>
 
+{{!-- Form to add a record to the table  --}}
 
+<h2>Add a Manufacturer</h2>
+<p>To add a new manufacturer, please enter the information below and click 'Submit'!</p>
+<form id="add-manufacturer-form-ajax">
+    
+    <label for="input-manufacturerName-ADD">Manufacturer Name: </label>
+    <input type="text" name="input-manufacturerName-ADD" id="input-manufacturerName-ADD" required>
+
+
+    <label for="input-phoneNumber-ADD">Phone Number: </label>
+        <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
+ 
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_Manufacturers.js" type="application/javascript"></script>

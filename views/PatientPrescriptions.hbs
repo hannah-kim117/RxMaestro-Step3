@@ -11,35 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Patient Prescriptions</h1>
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add a Prescription</h2>
-<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
-<form id="add-patientPrescription-form-ajax">
-    <label for="input-dosage-ADD">Dosage: </label>
-    <input type="text" name="input-dosage-ADD" id="input-dosage-ADD" required>
-    
-    <label for="input-drugID-ADD">Drug Name: </label>
-    <select name="input-drugID-ADD" id="input-drugID-ADD">
-        <option value="">Select a Drug</option>
-        {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugName}}</option>
-        {{/each}}
-    </select>   
-
-    <label for="input-patientID-ADD">Patient Name: </label>
-    <select name="input-patientID-ADD" id="input-patientID-ADD">
-        <option value="">Select a Patient</option>
-        {{#each patients}}
-        <option value="{{this.patientID}}">{{this.name}}</option>
-        {{/each}}
-    </select>   
-
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_patientPrescription.js" type="application/javascript"></script>
-
 <table border="1" cellpadding="5" id="prescription-table">
     <thead>
         <tr>
@@ -70,13 +41,47 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 </table>
 <script src="./delete_patientPrescription.js" type="application/javascript"></script>
 
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Prescription</h2>
+<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
+<form id="add-patientPrescription-form-ajax">
+    <label for="input-dosage-ADD">Dosage: </label>
+    <input type="text" name="input-dosage-ADD" id="input-dosage-ADD" required>
+    
+    <label for="input-drugID-ADD">Drug Name: </label>
+    <select name="input-drugID-ADD" id="input-drugID-ADD">
+        <option value="">Select a Drug</option>
+        {{#each drugs}}
+        <option value="{{this.drugID}}">{{this.drugName}}</option>
+        {{/each}}
+    </select>   
+
+    <label for="input-patientID-ADD">Patient Name: </label>
+    <select name="input-patientID-ADD" id="input-patientID-ADD">
+        <option value="">Select a Patient</option>
+        {{#each patients}}
+        <option value="{{this.patientID}}">{{this.name}}</option>
+        {{/each}}
+    </select>   
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_patientPrescription.js" type="application/javascript"></script>
 
 {{!-- Form to update a record to the table  --}}
 <h2>Updating A Patient's Prescription Form</h2>
 <form id="update-patientPrescription-form-ajax">
 
     <label for="input-patientPrescriptionID-UPDATE">Prescription ID: </label>
-    <input type="number" name="input-patientPrescriptionID-UPDATE" id="input-patientPrescriptionID-UPDATE" required>
+    {{!-- <input type="number" name="input-patientPrescriptionID-UPDATE" id="input-patientPrescriptionID-UPDATE" required> --}}
+    <select name="input-patientPrescriptionID-UPDATE" id="input-patientPrescriptionID-UPDATE">
+        <option value="">Select a Prescription ID</option>
+        {{#each data}}
+        <option value="{{this.patientPrescriptionID}}">{{this.patientPrescriptionID}}</option>
+        {{/each}}
+    </select>   
 
     <label for="input-patientID-UPDATE">Patient: </label>
     <select name="input-patientID-UPDATE" id="input-patientID-UPDATE">

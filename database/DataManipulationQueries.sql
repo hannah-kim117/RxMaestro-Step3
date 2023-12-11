@@ -1,5 +1,5 @@
 -- Data Manipulation Queries for RxMaestro
--- ":" character used to denote variables
+-- "${}" used to denote variables
 -- that will have data from backend
 
 ------------------------------------------------------------
@@ -89,6 +89,10 @@ SELECT patientID, name, phoneNumber FROM Patients;
 -- CREATE entry
 INSERT INTO DrugInteractionSources (sourceName, url)
 VALUES ('${sourceName}', '${url}');
+
+-- DELETE entry
+DELETE FROM DrugInteractionSources
+WHERE sourceName='${sourceName}';
 
 -- READ all attributes
 SELECT sourceName, url FROM DrugInteractionSources;

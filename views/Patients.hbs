@@ -11,22 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Patients</h1>
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add a Patient</h2>
-<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
-<form id="add-patient-form-ajax">
-    
-    <label for="input-patientName-ADD">Patient Name: </label>
-    <input type="text" name="input-patientName-ADD" id="input-patientName-ADD" required>
-    
-    <label for="input-phoneNumber-ADD">Phone Number: </label>
-    <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_Patients.js" type="application/javascript"></script>
-
 <table border="1" cellpadding="5" id="patient-table">
     <thead>
         <tr>
@@ -50,3 +34,18 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
     </tbody>
 </table>
 
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Patient</h2>
+<p>To add a new prescription, please enter the information below and click 'Submit'!</p>
+<form id="add-patient-form-ajax">
+    
+    <label for="input-patientName-ADD">Patient Name: </label>
+    <input type="text" name="input-patientName-ADD" id="input-patientName-ADD" required>
+    
+    <label for="input-phoneNumber-ADD">Phone Number: </label>
+    <input type="text" name="input-phoneNumber-ADD" id="input-phoneNumber-ADD" required>
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_Patients.js" type="application/javascript"></script>

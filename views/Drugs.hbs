@@ -11,29 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Drugs</h1>
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add a Drug</h2>
-<p>To add a new drug, please enter the information below and click 'Submit'!</p>
-<form id="add-drug-form-ajax">
-    <label for="input-drugID-ADD">Drug RXCUI: </label>
-    <input type="text" name="input-drugID-ADD" id="input-drugID-ADD" required>   
-    <label for="input-drugName-ADD">Drug Name: </label>
-    <input type="text" name="input-drugName-ADD" id="input-drugName-ADD" required>
-    <label for="input-manufacturerID-ADD">Manufacturer: </label>
-    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
-        <option value="">Select a Manufacturer</option>
-        {{#each manufacturers}}
-        <option value="{{this.manufacturerID}}">{{this.name}}</option>
-        {{/each}}
-    </select>  
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_drug.js" type="application/javascript"></script>
-
-
-
 {{!-- Create a table --}}
 <table border="1" cellpadding="5" id="drug-table">
 
@@ -60,3 +37,24 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
         {{/each}}
     </tbody>
 </table>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Drug</h2>
+<p>To add a new drug, please enter the information below and click 'Submit'!</p>
+<form id="add-drug-form-ajax">
+    <label for="input-drugID-ADD">Drug RXCUI: </label>
+    <input type="text" name="input-drugID-ADD" id="input-drugID-ADD" required>   
+    <label for="input-drugName-ADD">Drug Name: </label>
+    <input type="text" name="input-drugName-ADD" id="input-drugName-ADD" required>
+    <label for="input-manufacturerID-ADD">Manufacturer: </label>
+    <select name="input-manufacturerID-ADD" id="input-manufacturerID-ADD">
+        <option value="">Select a Manufacturer</option>
+        {{#each manufacturers}}
+        <option value="{{this.manufacturerID}}">{{this.name}}</option>
+        {{/each}}
+    </select>  
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_drug.js" type="application/javascript"></script>

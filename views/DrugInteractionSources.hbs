@@ -11,24 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Drug Interaction Sources</h1>
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add a Source</h2>
-<p>To add a new source, please enter the information below and click 'Submit'!</p>
-<form id="add-drug-interaction-source-form-ajax">
-    <label for="input-sourceName-ADD">Source Name: </label>
-    <input type="text" name="input-sourceName-ADD" id="input-sourceName-ADD" required>
-    
-    <label for="input-url-ADD">URL: </label>
-    <input type="text" name="input-url-ADD" id="input-url-ADD" required>
-
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_DrugInteractionSources.js" type="application/javascript"></script>
-
-
-
 {{!-- Create a table --}}
 <table border="1" cellpadding="5" id="drug-interaction-source-table">
 
@@ -58,3 +40,19 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
     </tbody>
 </table>
 <script src="./delete_drugInteractionSource.js" type="application/javascript"></script>
+
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Source</h2>
+<p>To add a new source, please enter the information below and click 'Submit'!</p>
+<form id="add-drug-interaction-source-form-ajax">
+    <label for="input-sourceName-ADD">Source Name: </label>
+    <input type="text" name="input-sourceName-ADD" id="input-sourceName-ADD" required>
+    
+    <label for="input-url-ADD">URL: </label>
+    <input type="text" name="input-url-ADD" id="input-url-ADD" required>
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_DrugInteractionSources.js" type="application/javascript"></script>

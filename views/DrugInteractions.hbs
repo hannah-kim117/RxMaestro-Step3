@@ -11,50 +11,6 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
 <h1>Drug Interactions</h1>
 
-{{!-- Form to add a record to the table  --}}
-<h2>Add a Drug Interaction</h2>
-<p>To add a new drug interaction, please enter the information below and click 'Submit'!</p>
-<P><em>(**Specific RXCUIs are used as the standard for describing drug interactions rather than drug names
-    due to the multiple associations a drug has with various RXCUIs.**)</em></P>
-<form id="add-drugInteraction-form-ajax">
-    <label for="input-drugID1-ADD">Drug RXCUI: </label>
-    <select name="input-drugID1-ADD" id="input-drugID1-ADD">
-        <option value="">Select a Drug</option>
-        {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugID}}</option>
-        {{/each}}
-    </select>  
-
-    <label for="input-drugID2-ADD">Drug RXCUI: </label>
-    <select name="input-drugID2-ADD" id="input-drugID2-ADD">
-        <option value="">Select a Drug</option>
-        {{#each drugs}}
-        <option value="{{this.drugID}}">{{this.drugID}}</option>
-        {{/each}}
-    </select>  
-    
-    <label for="input-sourceName-ADD">Interaction Source: </label>
-    <select name="input-sourceName-ADD" id="input-sourceName-ADD">
-        <option value="">Select a Source</option>
-        {{#each sources}}
-        <option value="{{this.sourceName}}">{{this.sourceName}}</option>
-        {{/each}}
-    </select>   
-
-    <label for="input-sideEffectDescription-ADD">Side Effects Description: </label>
-    <input type="text" name="input-sideEffectDescription-ADD" id="input-sideEffectDescription-ADD">
-
-    <label for="input-sideEffectSeverity-ADD">Side Effects Severity: </label>
-    <input type="text" name="input-sideEffectSeverity-ADD" id="input-sideEffectSeverity-ADD">    
-
-    <button type="submit" id ="add-button">Submit</button>
-</form>
-
-{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
-<script src="./add_drugInteraction.js" type="application/javascript"></script>
-
-
-
 {{!-- Create a table --}}
 <table border="1" cellpadding="5" id="drug-interaction-table">
 
@@ -89,6 +45,47 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
     </tbody>
 </table>
 
+{{!-- Form to add a record to the table  --}}
+<h2>Add a Drug Interaction</h2>
+<p>To add a new drug interaction, please enter the information below and click 'Submit'!</p>
+<P><em>(**Specific RXCUIs are used as the standard for describing drug interactions rather than drug names
+    due to the multiple associations a drug has with various RXCUIs.**)</em></P>
+<form id="add-drugInteraction-form-ajax">
+    <label for="input-drugID1-ADD">Drug RXCUI: </label>
+    <select name="input-drugID1-ADD" id="input-drugID1-ADD">
+        <option value="">Select a Drug</option>
+        {{#each drugs}}
+        <option value="{{this.drugID}}">{{this.drugID}}</option>
+        {{/each}}
+    </select>  
+
+    <label for="input-drugID2-ADD">Drug RXCUI: </label>
+    <select name="input-drugID2-ADD" id="input-drugID2-ADD">
+        <option value="">Select a Drug</option>
+        {{#each drugs}}
+        <option value="{{this.drugID}}">{{this.drugID}}</option>
+        {{/each}}
+    </select>  
+    
+    <label for="input-sourceName-ADD">Interaction Source: </label>
+    <select name="input-sourceName-ADD" id="input-sourceName-ADD">
+        <option value="">None</option>
+        {{#each sources}}
+        <option value="{{this.sourceName}}">{{this.sourceName}}</option>
+        {{/each}}
+    </select>   
+
+    <label for="input-sideEffectDescription-ADD">Side Effects Description: </label>
+    <input type="text" name="input-sideEffectDescription-ADD" id="input-sideEffectDescription-ADD">
+
+    <label for="input-sideEffectSeverity-ADD">Side Effects Severity: </label>
+    <input type="text" name="input-sideEffectSeverity-ADD" id="input-sideEffectSeverity-ADD">    
+
+    <button type="submit" id ="add-button">Submit</button>
+</form>
+
+{{!-- Embed our javascript to handle the DOM manipulation and AJAX request --}}
+<script src="./add_drugInteraction.js" type="application/javascript"></script>
 
 {{!-- Form to update a record to the table  --}}
 <h2>Update a Drug Interaction</h2>
@@ -104,7 +101,7 @@ Source of starter code: https://github.com/osu-cs340-ecampus/nodejs-starter-app 
 
     <label for="input-sourceName-UPDATE">Interaction Source: </label>
     <select name="input-sourceName-UPDATE" id="input-sourceName-UPDATE">
-        <option value="">Select a Source</option>
+        <option value="">None</option>
         {{#each sources}}
         <option value="{{this.sourceName}}">{{this.sourceName}}</option>
         {{/each}}
